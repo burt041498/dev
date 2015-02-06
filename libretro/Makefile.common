@@ -373,6 +373,7 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/FifoPlayer/FifoAnalyzer.cpp \
 					$(COREDIR)/Core/FifoPlayer/FifoDataFile.cpp \
 					$(COREDIR)/Core/FifoPlayer/FifoPlayer.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoPlaybackAnalyzer.cpp \
 					$(COREDIR)/Core/FifoPlayer/FifoRecordAnalyzer.cpp \
 					$(COREDIR)/Core/FifoPlayer/FifoRecorder.cpp \
 					$(COREDIR)/Core/HLE/HLE.cpp \
