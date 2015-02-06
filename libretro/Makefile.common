@@ -99,10 +99,10 @@ SOURCES_C   += $(EXTDIR)/libpng/png.c \
 					$(EXTDIR)/libpng/pngwutil.c
 
 # Target Bochs
-SOURCES_CXX += $(EXTDIR)/Bochs_disasm/dis_decode.cc \
-					$(EXTDIR)/Bochs_disasm/dis_groups.cc \
-					$(EXTDIR)/Bochs_disasm/resolve.cc \
-					$(EXTDIR)/Bochs_disasm/syntax.cc
+SOURCES_CXX += $(EXTDIR)/Bochs_disasm/dis_decode.cpp \
+					$(EXTDIR)/Bochs_disasm/dis_groups.cpp \
+					$(EXTDIR)/Bochs_disasm/resolve.cpp \
+					$(EXTDIR)/Bochs_disasm/syntax.cpp
 
 # Target LZO
 SOURCES_C   += $(EXTDIR)/LZO/minilzo.c
