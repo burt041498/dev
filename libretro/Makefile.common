@@ -107,6 +107,12 @@ SOURCES_C   += $(EXTDIR)/libpng/png.c \
 					$(EXTDIR)/libpng/pngwtran.c \
 					$(EXTDIR)/libpng/pngwutil.c
 
+# Target Bochs
+SOURCES_CXX += $(EXTDIR)/Bochs_disasm/dis_decode.cc \
+					$(EXTDIR)/Bochs_disasm/dis_groups.cc \
+					$(EXTDIR)/Bochs_disasm/resolve.cc \
+					$(EXTDIR)/Bochs_disasm/syntax.cc
+
 # Target LZO
 SOURCES_C   += $(EXTDIR)/LZO/minilzo.c
 
@@ -220,6 +226,7 @@ SOURCES_CXX += $(COREDIR)/VideoBackends/Software/BPMemLoader.cpp \
 					$(COREDIR)/VideoBackends/Software/Tev.cpp \
 					$(COREDIR)/VideoBackends/Software/TextureEncoder.cpp \
 					$(COREDIR)/VideoBackends/Software/TextureSampler.cpp \
+					$(COREDIR)/VideoBackends/Software/TransformUnit.cpp \
 					$(COREDIR)/VideoBackends/Software/SWVertexLoader.cpp \
 					$(COREDIR)/VideoBackends/Software/SWVideoConfig.cpp \
 					$(COREDIR)/VideoBackends/Software/XFMemLoader.cpp
