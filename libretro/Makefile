@@ -42,7 +42,7 @@ endif
 # Dirs
 ROOTDIR			= ../Source
 FFMPEGDIR		= $(ROOTDIR)/ffmpeg
-LIBRETRODIR		= $(ROOTDIR)/libretro
+LIBRETRODIR		= $(ROOTDIR)/../libretro
 COREDIR			= $(ROOTDIR)/Core
 CORECOMMONDIR  = $(ROOTDIR)/Core/Common
 COMMONDIR		= $(ROOTDIR)/Common

@@ -532,3 +532,5 @@ SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp
 
 # Unix-only (requires Bluez dependency)
 #SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/IONix.cpp
+
+SOURCES_CXX += $(LIBRETRODIR)/Host.cpp
