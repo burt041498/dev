@@ -4,7 +4,9 @@
 
 #include "VideoBackends/OGL/GLInterfaceBase.h"
 
-#ifdef ANDROID
+#ifdef __LIBRETRO__
+#include "VideoBackends/OGL/GLInterface/LibretroGL.h"
+#elif defined(ANDROID)
 #include "VideoBackends/OGL/GLInterface/EGLAndroid.h"
 #elif defined(__APPLE__)
 #include "VideoBackends/OGL/GLInterface/AGL.h"
@@ -22,7 +24,9 @@
 
 cInterfaceBase* HostGL_CreateGLInterface()
 {
-	#ifdef ANDROID
+   #ifdef __LIBRETRO__
+		return new cInterfaceLibretroGL;
+	#elif defined(ANDROID)
 		return new cInterfaceEGLAndroid;
 	#elif defined(__APPLE__)
 		return new cInterfaceAGL;

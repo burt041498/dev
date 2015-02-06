@@ -8,6 +8,7 @@ INCFLAGS := \
 	-I$(NATIVEDIR)/ext/stb_vorbis \
 	$(FFMPEGINCFLAGS) \
 	-I$(EXTDIR) \
+	-I$(EXTDIR)/GL \
 	-I$(EXTDIR)/Bochs_disasm \
 	-I$(EXTDIR)/polarssl/include \
 	-I$(EXTDIR)/SFML/include \
@@ -201,7 +202,7 @@ SOURCES_CXX += $(COREDIR)/DiscIO/BannerLoader.cpp \
 					$(COREDIR)/DiscIO/WiiWad.cpp
 
 #Target videosoftware
-#SOURCES_CXX += $(COREDIR)/VideoBackends/Software/BPMemLoader.cpp \
+SOURCES_CXX += $(COREDIR)/VideoBackends/Software/BPMemLoader.cpp \
 					$(COREDIR)/VideoBackends/Software/Clipper.cpp \
 					$(COREDIR)/VideoBackends/Software/SWCommandProcessor.cpp \
 					$(COREDIR)/VideoBackends/Software/CPMemLoader.cpp \
@@ -209,7 +210,7 @@ SOURCES_CXX += $(COREDIR)/DiscIO/BannerLoader.cpp \
 					$(COREDIR)/VideoBackends/Software/EfbCopy.cpp \
 					$(COREDIR)/VideoBackends/Software/EfbInterface.cpp \
 					$(COREDIR)/VideoBackends/Software/HwRasterizer.cpp \
-					$(COREDIR)/VideoBackends/Software/SWMain.cpp \
+					$(COREDIR)/VideoBackends/Software/SWmain.cpp \
 					$(COREDIR)/VideoBackends/Software/OpcodeDecoder.cpp \
 					$(COREDIR)/VideoBackends/Software/RasterFont.cpp \
 					$(COREDIR)/VideoBackends/Software/Rasterizer.cpp \
@@ -224,7 +225,7 @@ SOURCES_CXX += $(COREDIR)/DiscIO/BannerLoader.cpp \
 					$(COREDIR)/VideoBackends/Software/XFMemLoader.cpp
 
 #Target video GL
-#SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/GLExtensions/GLExtensions.cpp \
+SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/GLExtensions/GLExtensions.cpp \
 					$(COREDIR)/VideoBackends/OGL/BoundingBox.cpp \
 					$(COREDIR)/VideoBackends/OGL/FramebufferManager.cpp \
 					$(COREDIR)/VideoBackends/OGL/GLUtil.cpp \
