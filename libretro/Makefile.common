@@ -440,17 +440,6 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/HW/VideoInterface.cpp \
 					$(COREDIR)/Core/HW/WII_IPC.cpp \
 					$(COREDIR)/Core/HW/Wiimote.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Classic.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Attachment.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Nunchuk.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Drums.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Guitar.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Turntable.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/EmuSubroutines.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Encryption.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Speaker.cpp \
-					$(COREDIR)/Core/HW/WiimoteReal/WiimoteReal.cpp \
 					$(COREDIR)/Core/HW/WiiSaveCrypted.cpp \
 					$(COREDIR)/Core/IPC_HLE/ICMPLin.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE.cpp \
@@ -466,6 +455,19 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_kbd.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_WiiMote.cpp \
 					$(COREDIR)/Core/IPC_HLE/WiiMote_HID_Attr.cpp
+
+SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Classic.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Attachment.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Nunchuk.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Drums.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Guitar.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Turntable.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/EmuSubroutines.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Encryption.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Speaker.cpp \
+
+SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/WiimoteReal.cpp 
 
 SOURCES_CXX += $(COREDIR)/Core/PowerPC/PowerPC.cpp \
 					$(COREDIR)/Core/PowerPC/PPCAnalyst.cpp \
@@ -526,5 +528,7 @@ SOURCES_CXX += $(COREDIR)/Core/PowerPC/JitCommon/JitBackpatch.cpp \
 					 $(COREDIR)/Core/HW/SI_GCAdapter.cpp
 
 # Unix-only
-#SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp \
-					$(COREDIR)/Core/HW/WiimoteReal/IONix.cpp
+SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp
+
+# Unix-only (requires Bluez dependency)
+#SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/IONix.cpp
