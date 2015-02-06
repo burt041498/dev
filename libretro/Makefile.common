@@ -3,20 +3,11 @@ INCFLAGS := \
 	-I$(COREDIR) \
 	-I$(COREDIR)/VideoCommon \
 	-I$(CORECOMMONDIR) \
-	-I$(COMMONDIR) \
-	-I$(NATIVEDIR)/ext/rg_etc1 \
-	-I$(NATIVEDIR)/ext/stb_vorbis \
-	$(FFMPEGINCFLAGS) \
-	-I$(EXTDIR) \
 	-I$(EXTDIR)/GL \
 	-I$(EXTDIR)/Bochs_disasm \
 	-I$(EXTDIR)/polarssl/include \
 	-I$(EXTDIR)/SFML/include \
-	-I$(NATIVEDIR)/ext/libzip \
-	-I$(NATIVEDIR)/ext \
-	-I$(NATIVEDIR) \
-	-I$(EXTDIR)/libkirk \
-	-I$(EXTDIR)/xbrz \
+	-I$(EXTDIR)/SFML/src \
 	-I$(EXTDIR)/xxhash 
 
 # Target PolarSSL
@@ -115,6 +106,25 @@ SOURCES_CXX += $(EXTDIR)/Bochs_disasm/dis_decode.cc \
 
 # Target LZO
 SOURCES_C   += $(EXTDIR)/LZO/minilzo.c
+
+# Target SFML
+SOURCES_CXX += $(EXTDIR)/SFML/src/SFML/Network/Http.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/IPAddress.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/Packet.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/Socket.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/SocketSelector.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/TcpListener.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/TcpSocket.cpp \
+					$(EXTDIR)/SFML/src/SFML/Network/UdpSocket.cpp \
+					$(EXTDIR)/SFML/src/SFML/System/Err.cpp \
+					$(EXTDIR)/SFML/src/SFML/System/String.cpp \
+					$(EXTDIR)/SFML/src/SFML/System/Time.cpp
+
+# SFML - UNIX
+SOURCES_CXX += $(EXTDIR)/SFML/src/SFML/Network/Unix/SocketImpl.cpp
+
+# SFML - Windows
+#SOURCES_CXX += $(EXTDIR)/SFML/src/SFML/Network/Win32/SocketImpl.cpp
 
 # Target XXHASH
 SOURCES_C   += $(EXTDIR)/xxhash/xxhash.c \
