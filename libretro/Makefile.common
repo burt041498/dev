@@ -1,0 +1,512 @@
+INCFLAGS := \
+	-I$(ROOTDIR) \
+	-I$(COREDIR) \
+	-I$(COREDIR)/VideoCommon \
+	-I$(CORECOMMONDIR) \
+	-I$(COMMONDIR) \
+	-I$(NATIVEDIR)/ext/rg_etc1 \
+	-I$(NATIVEDIR)/ext/stb_vorbis \
+	$(FFMPEGINCFLAGS) \
+	-I$(EXTDIR) \
+	-I$(EXTDIR)/Bochs_disasm \
+	-I$(EXTDIR)/polarssl/include \
+	-I$(EXTDIR)/SFML/include \
+	-I$(NATIVEDIR)/ext/libzip \
+	-I$(NATIVEDIR)/ext \
+	-I$(NATIVEDIR) \
+	-I$(EXTDIR)/libkirk \
+	-I$(EXTDIR)/xbrz \
+	-I$(EXTDIR)/xxhash 
+
+# Target PolarSSL
+SOURCES_C   += $(EXTDIR)/polarssl/library/asn1write.c \
+					$(EXTDIR)/polarssl/library/asn1parse.c
+					
+SOURCES_C   += $(EXTDIR)/polarssl/library/aes.c \
+					$(EXTDIR)/polarssl/library/aesni.c \
+					$(EXTDIR)/polarssl/library/arc4.c \
+					$(EXTDIR)/polarssl/library/base64.c \
+					$(EXTDIR)/polarssl/library/bignum.c \
+					$(EXTDIR)/polarssl/library/blowfish.c \
+					$(EXTDIR)/polarssl/library/camellia.c \
+					$(EXTDIR)/polarssl/library/ccm.c \
+					$(EXTDIR)/polarssl/library/certs.c \
+					$(EXTDIR)/polarssl/library/cipher.c \
+					$(EXTDIR)/polarssl/library/cipher_wrap.c \
+					$(EXTDIR)/polarssl/library/ctr_drbg.c \
+					$(EXTDIR)/polarssl/library/debug.c \
+					$(EXTDIR)/polarssl/library/des.c \
+					$(EXTDIR)/polarssl/library/dhm.c \
+					$(EXTDIR)/polarssl/library/ecp.c \
+					$(EXTDIR)/polarssl/library/ecp_curves.c \
+					$(EXTDIR)/polarssl/library/ecdh.c \
+					$(EXTDIR)/polarssl/library/ecdsa.c \
+					$(EXTDIR)/polarssl/library/entropy.c \
+					$(EXTDIR)/polarssl/library/entropy_poll.c \
+					$(EXTDIR)/polarssl/library/error.c \
+					$(EXTDIR)/polarssl/library/gcm.c \
+					$(EXTDIR)/polarssl/library/havege.c \
+					$(EXTDIR)/polarssl/library/hmac_drbg.c \
+					$(EXTDIR)/polarssl/library/md.c \
+					$(EXTDIR)/polarssl/library/md_wrap.c \
+					$(EXTDIR)/polarssl/library/md2.c \
+					$(EXTDIR)/polarssl/library/md4.c \
+					$(EXTDIR)/polarssl/library/md5.c \
+					$(EXTDIR)/polarssl/library/memory_buffer_alloc.c \
+					$(EXTDIR)/polarssl/library/net.c \
+					$(EXTDIR)/polarssl/library/oid.c \
+					$(EXTDIR)/polarssl/library/padlock.c \
+					$(EXTDIR)/polarssl/library/pbkdf2.c \
+					$(EXTDIR)/polarssl/library/pem.c \
+					$(EXTDIR)/polarssl/library/pkcs5.c \
+					$(EXTDIR)/polarssl/library/pkcs11.c \
+					$(EXTDIR)/polarssl/library/pkcs12.c \
+					$(EXTDIR)/polarssl/library/pk.c \
+					$(EXTDIR)/polarssl/library/pk_wrap.c \
+					$(EXTDIR)/polarssl/library/pkparse.c \
+					$(EXTDIR)/polarssl/library/pkwrite.c \
+					$(EXTDIR)/polarssl/library/platform.c \
+					$(EXTDIR)/polarssl/library/ripemd160.c \
+					$(EXTDIR)/polarssl/library/rsa.c \
+					$(EXTDIR)/polarssl/library/sha1.c \
+					$(EXTDIR)/polarssl/library/sha256.c \
+					$(EXTDIR)/polarssl/library/sha512.c \
+					$(EXTDIR)/polarssl/library/ssl_cache.c \
+					$(EXTDIR)/polarssl/library/ssl_ciphersuites.c \
+					$(EXTDIR)/polarssl/library/ssl_cli.c \
+					$(EXTDIR)/polarssl/library/ssl_srv.c \
+					$(EXTDIR)/polarssl/library/ssl_tls.c \
+					$(EXTDIR)/polarssl/library/threading.c \
+					$(EXTDIR)/polarssl/library/timing.c \
+					$(EXTDIR)/polarssl/library/version.c \
+					$(EXTDIR)/polarssl/library/version_features.c \
+					$(EXTDIR)/polarssl/library/x509.c \
+					$(EXTDIR)/polarssl/library/x509_crt.c \
+					$(EXTDIR)/polarssl/library/x509_crl.c \
+					$(EXTDIR)/polarssl/library/x509_csr.c \
+					$(EXTDIR)/polarssl/library/x509_create.c \
+					$(EXTDIR)/polarssl/library/x509write_crt.c \
+					$(EXTDIR)/polarssl/library/x509write_csr.c \
+					$(EXTDIR)/polarssl/library/xtea.c
+
+# Target libpng
+SOURCES_C   += $(EXTDIR)/libpng/png.c \
+					$(EXTDIR)/libpng/pngerror.c \
+					$(EXTDIR)/libpng/pngget.c \
+					$(EXTDIR)/libpng/pngmem.c \
+					$(EXTDIR)/libpng/pngpread.c \
+					$(EXTDIR)/libpng/pngread.c \
+					$(EXTDIR)/libpng/pngrio.c \
+					$(EXTDIR)/libpng/pngrtran.c \
+					$(EXTDIR)/libpng/pngrutil.c \
+					$(EXTDIR)/libpng/pngset.c \
+					$(EXTDIR)/libpng/pngtrans.c \
+					$(EXTDIR)/libpng/pngwio.c \
+					$(EXTDIR)/libpng/pngwrite.c \
+					$(EXTDIR)/libpng/pngwtran.c \
+					$(EXTDIR)/libpng/pngwutil.c
+
+# Target LZO
+SOURCES_C   += $(EXTDIR)/LZO/minilzo.c
+
+# Target XXHASH
+SOURCES_C   += $(EXTDIR)/xxhash/xxhash.c \
+					$(EXTDIR)/xxhash/xxhsum.c
+
+# Target SOIL
+SOURCES_C   += $(EXTDIR)/SOIL/image_DXT.c \
+					$(EXTDIR)/SOIL/image_helper.c \
+					$(EXTDIR)/SOIL/SOIL.c \
+					$(EXTDIR)/SOIL/stb_image_aug.c
+
+# Target audiocommon
+SOURCES_CXX += $(COREDIR)/AudioCommon/AudioCommon.cpp \
+					$(COREDIR)/AudioCommon/DPL2Decoder.cpp \
+					$(COREDIR)/AudioCommon/Mixer.cpp \
+					$(COREDIR)/AudioCommon/WaveFile.cpp \
+					$(COREDIR)/AudioCommon/NullSoundStream.cpp
+
+# Target Common 
+SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
+					$(CORECOMMONDIR)/CDUtils.cpp \
+					$(CORECOMMONDIR)/ColorUtil.cpp \
+					$(CORECOMMONDIR)/FileSearch.cpp \
+					$(CORECOMMONDIR)/FileUtil.cpp \
+					$(CORECOMMONDIR)/GekkoDisassembler.cpp \
+					$(CORECOMMONDIR)/Hash.cpp \
+					$(CORECOMMONDIR)/IniFile.cpp \
+					$(CORECOMMONDIR)/JitRegister.cpp \
+					$(CORECOMMONDIR)/MathUtil.cpp \
+					$(CORECOMMONDIR)/MemArena.cpp \
+					$(CORECOMMONDIR)/MemoryUtil.cpp \
+					$(CORECOMMONDIR)/Misc.cpp \
+					$(CORECOMMONDIR)/MsgHandler.cpp \
+					$(CORECOMMONDIR)/NandPaths.cpp \
+					$(CORECOMMONDIR)/Network.cpp \
+					$(CORECOMMONDIR)/PcapFile.cpp \
+					$(CORECOMMONDIR)/PerformanceCounter.cpp \
+					$(CORECOMMONDIR)/Profiler.cpp \
+					$(CORECOMMONDIR)/SettingsHandler.cpp \
+					$(CORECOMMONDIR)/SDCardUtil.cpp \
+					$(CORECOMMONDIR)/StringUtil.cpp \
+					$(CORECOMMONDIR)/SymbolDB.cpp \
+					$(CORECOMMONDIR)/SysConf.cpp \
+					$(CORECOMMONDIR)/Thread.cpp \
+					$(CORECOMMONDIR)/Timer.cpp \
+					$(CORECOMMONDIR)/Version.cpp \
+					$(CORECOMMONDIR)/Crypto/bn.cpp \
+					$(CORECOMMONDIR)/Crypto/ec.cpp \
+					$(CORECOMMONDIR)/Logging/ConsoleListener.cpp \
+					$(CORECOMMONDIR)/Logging/LogManager.cpp
+
+ifeq ($(WITH_DYNAREC), x86_64)
+CPUFLAGS := -msse -msse2 -D_M_X86_64 -D_ARCH_64
+SOURCES_CXX += $(CORECOMMONDIR)/x64ABI.cpp \
+					$(CORECOMMONDIR)/x64Analyzer.cpp \
+					$(CORECOMMONDIR)/x64Emitter.cpp \
+					$(CORECOMMONDIR)/x64FPURoundMode.cpp \
+					$(CORECOMMONDIR)/x64CPUDetect.cpp
+else
+	CPUFLAGS := -msse -msse2 -D_M_X86 -D_ARCH_32
+endif
+
+#Target inputcommon
+SOURCES_CXX += $(COREDIR)/InputCommon/ControllerEmu.cpp \
+					$(COREDIR)/InputCommon/InputConfig.cpp \
+					$(COREDIR)/InputCommon/ControllerInterface/ControllerInterface.cpp \
+					$(COREDIR)/InputCommon/ControllerInterface/Device.cpp \
+					$(COREDIR)/InputCommon/ControllerInterface/ExpressionParser.cpp
+
+#Target discIO
+SOURCES_CXX += $(COREDIR)/DiscIO/BannerLoader.cpp \
+					$(COREDIR)/DiscIO/BannerLoaderGC.cpp \
+					$(COREDIR)/DiscIO/BannerLoaderWii.cpp \
+					$(COREDIR)/DiscIO/Blob.cpp \
+					$(COREDIR)/DiscIO/CISOBlob.cpp \
+					$(COREDIR)/DiscIO/WbfsBlob.cpp \
+					$(COREDIR)/DiscIO/CompressedBlob.cpp \
+					$(COREDIR)/DiscIO/DiscScrubber.cpp \
+					$(COREDIR)/DiscIO/DriveBlob.cpp \
+					$(COREDIR)/DiscIO/FileBlob.cpp \
+					$(COREDIR)/DiscIO/FileMonitor.cpp \
+					$(COREDIR)/DiscIO/FileSystemGCWii.cpp \
+					$(COREDIR)/DiscIO/Filesystem.cpp \
+					$(COREDIR)/DiscIO/NANDContentLoader.cpp \
+					$(COREDIR)/DiscIO/VolumeCommon.cpp \
+					$(COREDIR)/DiscIO/VolumeCreator.cpp \
+					$(COREDIR)/DiscIO/VolumeDirectory.cpp \
+					$(COREDIR)/DiscIO/VolumeGC.cpp \
+					$(COREDIR)/DiscIO/VolumeWad.cpp \
+					$(COREDIR)/DiscIO/VolumeWiiCrypted.cpp \
+					$(COREDIR)/DiscIO/WiiWad.cpp
+
+#Target videosoftware
+#SOURCES_CXX += $(COREDIR)/VideoBackends/Software/BPMemLoader.cpp \
+					$(COREDIR)/VideoBackends/Software/Clipper.cpp \
+					$(COREDIR)/VideoBackends/Software/SWCommandProcessor.cpp \
+					$(COREDIR)/VideoBackends/Software/CPMemLoader.cpp \
+					$(COREDIR)/VideoBackends/Software/DebugUtil.cpp \
+					$(COREDIR)/VideoBackends/Software/EfbCopy.cpp \
+					$(COREDIR)/VideoBackends/Software/EfbInterface.cpp \
+					$(COREDIR)/VideoBackends/Software/HwRasterizer.cpp \
+					$(COREDIR)/VideoBackends/Software/SWMain.cpp \
+					$(COREDIR)/VideoBackends/Software/OpcodeDecoder.cpp \
+					$(COREDIR)/VideoBackends/Software/RasterFont.cpp \
+					$(COREDIR)/VideoBackends/Software/Rasterizer.cpp \
+					$(COREDIR)/VideoBackends/Software/SWRenderer.cpp \
+					$(COREDIR)/VideoBackends/Software/SetupUnit.cpp \
+					$(COREDIR)/VideoBackends/Software/SWStatistics.cpp \
+					$(COREDIR)/VideoBackends/Software/Tev.cpp \
+					$(COREDIR)/VideoBackends/Software/TextureEncoder.cpp \
+					$(COREDIR)/VideoBackends/Software/TextureSampler.cpp \
+					$(COREDIR)/VideoBackends/Software/SWVertexLoader.cpp \
+					$(COREDIR)/VideoBackends/Software/SWVideoConfig.cpp \
+					$(COREDIR)/VideoBackends/Software/XFMemLoader.cpp
+
+#Target video GL
+#SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/GLExtensions/GLExtensions.cpp \
+					$(COREDIR)/VideoBackends/OGL/BoundingBox.cpp \
+					$(COREDIR)/VideoBackends/OGL/FramebufferManager.cpp \
+					$(COREDIR)/VideoBackends/OGL/GLUtil.cpp \
+					$(COREDIR)/VideoBackends/OGL/main.cpp \
+					$(COREDIR)/VideoBackends/OGL/NativeVertexFormat.cpp \
+					$(COREDIR)/VideoBackends/OGL/PerfQuery.cpp \
+					$(COREDIR)/VideoBackends/OGL/PostProcessing.cpp \
+					$(COREDIR)/VideoBackends/OGL/ProgramShaderCache.cpp \
+					$(COREDIR)/VideoBackends/OGL/RasterFont.cpp \
+					$(COREDIR)/VideoBackends/OGL/Render.cpp \
+					$(COREDIR)/VideoBackends/OGL/SamplerCache.cpp \
+					$(COREDIR)/VideoBackends/OGL/StreamBuffer.cpp \
+					$(COREDIR)/VideoBackends/OGL/TextureCache.cpp \
+					$(COREDIR)/VideoBackends/OGL/TextureConverter.cpp \
+					$(COREDIR)/VideoBackends/OGL/VertexManager.cpp \
+					$(COREDIR)/VideoBackends/OGL/GLInterface/GLInterface.cpp
+
+# Target video common
+SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \
+					$(COREDIR)/VideoCommon/BPFunctions.cpp \
+					$(COREDIR)/VideoCommon/BPMemory.cpp \
+					$(COREDIR)/VideoCommon/BPStructs.cpp \
+					$(COREDIR)/VideoCommon/CPMemory.cpp \
+					$(COREDIR)/VideoCommon/CommandProcessor.cpp \
+					$(COREDIR)/VideoCommon/Debugger.cpp \
+					$(COREDIR)/VideoCommon/DriverDetails.cpp \
+					$(COREDIR)/VideoCommon/Fifo.cpp \
+					$(COREDIR)/VideoCommon/FPSCounter.cpp \
+					$(COREDIR)/VideoCommon/FramebufferManagerBase.cpp \
+					$(COREDIR)/VideoCommon/GeometryShaderGen.cpp \
+					$(COREDIR)/VideoCommon/GeometryShaderManager.cpp \
+					$(COREDIR)/VideoCommon//HiresTextures.cpp \
+					$(COREDIR)/VideoCommon/ImageWrite.cpp \
+					$(COREDIR)/VideoCommon/IndexGenerator.cpp \
+					$(COREDIR)/VideoCommon/MainBase.cpp \
+					$(COREDIR)/VideoCommon/OnScreenDisplay.cpp \
+					$(COREDIR)/VideoCommon/OpcodeDecoding.cpp \
+					$(COREDIR)/VideoCommon/PerfQueryBase.cpp \
+					$(COREDIR)/VideoCommon/PixelEngine.cpp \
+					$(COREDIR)/VideoCommon/PixelShaderGen.cpp \
+					$(COREDIR)/VideoCommon/PixelShaderManager.cpp \
+					$(COREDIR)/VideoCommon/PostProcessing.cpp \
+					$(COREDIR)/VideoCommon/RenderBase.cpp \
+					$(COREDIR)/VideoCommon/Statistics.cpp \
+					$(COREDIR)/VideoCommon/TextureCacheBase.cpp \
+					$(COREDIR)/VideoCommon/TextureConversionShader.cpp \
+					$(COREDIR)/VideoCommon/TextureDecoder_Common.cpp \
+					$(COREDIR)/VideoCommon/VertexLoader.cpp \
+					$(COREDIR)/VideoCommon/VertexLoaderBase.cpp \
+					$(COREDIR)/VideoCommon/VertexLoaderManager.cpp \
+					$(COREDIR)/VideoCommon/VertexLoader_Color.cpp \
+					$(COREDIR)/VideoCommon/VertexLoader_Normal.cpp \
+					$(COREDIR)/VideoCommon/VertexLoader_Position.cpp \
+					$(COREDIR)/VideoCommon/VertexLoader_TextCoord.cpp \
+					$(COREDIR)/VideoCommon/VertexManagerBase.cpp \
+					$(COREDIR)/VideoCommon/VertexShaderGen.cpp \
+					$(COREDIR)/VideoCommon/VertexShaderManager.cpp \
+					$(COREDIR)/VideoCommon/VideoBackendBase.cpp \
+					$(COREDIR)/VideoCommon/VideoConfig.cpp \
+					$(COREDIR)/VideoCommon/VideoState.cpp \
+					$(COREDIR)/VideoCommon/XFMemory.cpp \
+					$(COREDIR)/VideoCommon/XFStructs.cpp \
+					$(COREDIR)/VideoCommon/TextureDecoder_x64.cpp \
+					$(COREDIR)/VideoCommon/VertexLoaderX64.cpp \
+
+#SOURCES_CXX += $(COREDIR)/VideoCommon/AVIDump.cpp
+
+
+# Target core
+SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
+					$(COREDIR)/Core/ARDecrypt.cpp \
+					$(COREDIR)/Core/BootManager.cpp \
+					$(COREDIR)/Core/ConfigManager.cpp \
+					$(COREDIR)/Core/Core.cpp \
+					$(COREDIR)/Core/CoreParameter.cpp \
+					$(COREDIR)/Core/CoreTiming.cpp \
+					$(COREDIR)/Core/DSPEmulator.cpp \
+					$(COREDIR)/Core/ec_wii.cpp \
+					$(COREDIR)/Core/GeckoCodeConfig.cpp \
+					$(COREDIR)/Core/GeckoCode.cpp \
+					$(COREDIR)/Core/HotkeyManager.cpp \
+					$(COREDIR)/Core/MemTools.cpp \
+					$(COREDIR)/Core/Movie.cpp \
+					$(COREDIR)/Core/NetPlayClient.cpp \
+					$(COREDIR)/Core/NetPlayServer.cpp \
+					$(COREDIR)/Core/PatchEngine.cpp \
+					$(COREDIR)/Core/State.cpp \
+					$(COREDIR)/Core/VolumeHandler.cpp \
+					$(COREDIR)/Core/Boot/Boot_BS2Emu.cpp \
+					$(COREDIR)/Core/Boot/Boot.cpp \
+					$(COREDIR)/Core/Boot/Boot_DOL.cpp \
+					$(COREDIR)/Core/Boot/Boot_ELF.cpp \
+					$(COREDIR)/Core/Boot/Boot_WiiWAD.cpp \
+					$(COREDIR)/Core/Boot/ElfReader.cpp \
+					$(COREDIR)/Core/Debugger/Debugger_SymbolMap.cpp \
+					$(COREDIR)/Core/Debugger/Dump.cpp \
+					$(COREDIR)/Core/Debugger/PPCDebugInterface.cpp \
+					$(COREDIR)/Core/DSP/DSPAssembler.cpp \
+					$(COREDIR)/Core/DSP/DSPDisassembler.cpp \
+					$(COREDIR)/Core/DSP/DSPAccelerator.cpp \
+					$(COREDIR)/Core/DSP/DSPCaptureLogger.cpp \
+					$(COREDIR)/Core/DSP/DSPIntCCUtil.cpp \
+					$(COREDIR)/Core/DSP/DSPIntExtOps.cpp \
+					$(COREDIR)/Core/DSP/DSPHWInterface.cpp \
+					$(COREDIR)/Core/DSP/DSPMemoryMap.cpp \
+					$(COREDIR)/Core/DSP/DSPStacks.cpp \
+					$(COREDIR)/Core/DSP/DSPAnalyzer.cpp \
+					$(COREDIR)/Core/DSP/DSPIntArithmetic.cpp \
+					$(COREDIR)/Core/DSP/DSPIntBranch.cpp \
+					$(COREDIR)/Core/DSP/DSPIntLoadStore.cpp \
+					$(COREDIR)/Core/DSP/DSPIntMisc.cpp \
+					$(COREDIR)/Core/DSP/DSPIntMultiplier.cpp \
+					$(COREDIR)/Core/DSP/DSPEmitter.cpp \
+					$(COREDIR)/Core/DSP/DSPCodeUtil.cpp \
+					$(COREDIR)/Core/DSP/LabelMap.cpp \
+					$(COREDIR)/Core/DSP/DSPInterpreter.cpp \
+					$(COREDIR)/Core/DSP/DSPCore.cpp \
+					$(COREDIR)/Core/DSP/DSPTables.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitRegCache.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitExtOps.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitBranch.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitCCUtil.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitArithmetic.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitLoadStore.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitMultiplier.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitUtil.cpp \
+					$(COREDIR)/Core/DSP/Jit/DSPJitMisc.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoAnalyzer.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoDataFile.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoPlayer.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoRecordAnalyzer.cpp \
+					$(COREDIR)/Core/FifoPlayer/FifoRecorder.cpp \
+					$(COREDIR)/Core/HLE/HLE.cpp \
+					$(COREDIR)/Core/HLE/HLE_Misc.cpp \
+					$(COREDIR)/Core/HLE/HLE_OS.cpp \
+					$(COREDIR)/Core/HW/AudioInterface.cpp \
+					$(COREDIR)/Core/HW/CPU.cpp \
+					$(COREDIR)/Core/HW/DSP.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/AX.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/AXWii.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/CARD.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/GBA.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/INIT.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/ROM.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/UCodes.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/Zelda.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/ZeldaADPCM.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/ZeldaSynth.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/UCodes/ZeldaVoice.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/MailHandler.cpp \
+					$(COREDIR)/Core/HW/DSPHLE/DSPHLE.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPDebugInterface.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPHost.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPSymbols.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPLLEGlobals.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPLLE.cpp \
+					$(COREDIR)/Core/HW/DSPLLE/DSPLLETools.cpp \
+					$(COREDIR)/Core/HW/DVDInterface.cpp \
+					$(COREDIR)/Core/HW/EXI_Channel.cpp \
+					$(COREDIR)/Core/HW/EXI.cpp \
+					$(COREDIR)/Core/HW/EXI_Device.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceAD16.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceAGP.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceAMBaseboard.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceEthernet.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceGecko.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceIPL.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceMemoryCard.cpp \
+					$(COREDIR)/Core/HW/EXI_DeviceMic.cpp \
+					$(COREDIR)/Core/HW/GCKeyboard.cpp \
+					$(COREDIR)/Core/HW/GCKeyboardEmu.cpp \
+					$(COREDIR)/Core/HW/GCMemcard.cpp \
+					$(COREDIR)/Core/HW/GCMemcardDirectory.cpp \
+					$(COREDIR)/Core/HW/GCMemcardRaw.cpp \
+					$(COREDIR)/Core/HW/GCPad.cpp \
+					$(COREDIR)/Core/HW/GCPadEmu.cpp \
+					$(COREDIR)/Core/HW/GPFifo.cpp \
+					$(COREDIR)/Core/HW/HW.cpp \
+					$(COREDIR)/Core/HW/Memmap.cpp \
+					$(COREDIR)/Core/HW/MemmapFunctions.cpp \
+					$(COREDIR)/Core/HW/MemoryInterface.cpp \
+					$(COREDIR)/Core/HW/MMIO.cpp \
+					$(COREDIR)/Core/HW/ProcessorInterface.cpp \
+					$(COREDIR)/Core/HW/SI.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceAMBaseboard.cpp \
+					$(COREDIR)/Core/HW/SI_Device.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceDanceMat.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceGBA.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceGCController.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceGCSteeringWheel.cpp \
+					$(COREDIR)/Core/HW/SI_DeviceKeyboard.cpp \
+					$(COREDIR)/Core/HW/Sram.cpp \
+					$(COREDIR)/Core/HW/StreamADPCM.cpp \
+					$(COREDIR)/Core/HW/SystemTimers.cpp \
+					$(COREDIR)/Core/HW/VideoInterface.cpp \
+					$(COREDIR)/Core/HW/WII_IPC.cpp \
+					$(COREDIR)/Core/HW/Wiimote.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Classic.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Attachment.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Nunchuk.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Drums.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Guitar.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Turntable.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/EmuSubroutines.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Encryption.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Speaker.cpp \
+					$(COREDIR)/Core/HW/WiimoteReal/WiimoteReal.cpp \
+					$(COREDIR)/Core/HW/WiiSaveCrypted.cpp \
+					$(COREDIR)/Core/IPC_HLE/ICMPLin.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_DI.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_es.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_FileIO.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_fs.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_Socket.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_net.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_net_ssl.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_sdio_slot0.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_kbd.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_WiiMote.cpp \
+					$(COREDIR)/Core/IPC_HLE/WiiMote_HID_Attr.cpp
+
+SOURCES_CXX += $(COREDIR)/Core/PowerPC/PowerPC.cpp \
+					$(COREDIR)/Core/PowerPC/PPCAnalyst.cpp \
+					$(COREDIR)/Core/PowerPC/PPCCache.cpp \
+					$(COREDIR)/Core/PowerPC/PPCSymbolDB.cpp \
+					$(COREDIR)/Core/PowerPC/PPCTables.cpp \
+					$(COREDIR)/Core/PowerPC/Profiler.cpp \
+					$(COREDIR)/Core/PowerPC/SignatureDB.cpp \
+					$(COREDIR)/Core/PowerPC/JitInterface.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_Branch.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_FloatingPoint.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_Integer.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_LoadStore.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_LoadStorePaired.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_Paired.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_SystemRegisters.cpp \
+					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_Tables.cpp
+
+SOURCES_CXX += $(COREDIR)/Core/PowerPC/JitCommon/JitAsmCommon.cpp \
+					$(COREDIR)/Core/PowerPC/JitCommon/JitBase.cpp \
+					$(COREDIR)/Core/PowerPC/JitCommon/JitCache.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/IR.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_Branch.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_LoadStore.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_SystemRegisters.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_LoadStoreFloating.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_LoadStorePaired.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_Paired.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_FloatingPoint.cpp \
+					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_Integer.cpp
+
+ifeq ($(WITH_DYNAREC), x86_64)
+SOURCES_CXX += $(COREDIR)/Core/PowerPC/Jit64IL/IR_X86.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64IL/JitIL.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64IL/JitIL_Tables.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit64_Tables.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/JitAsm.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_Branch.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_FloatingPoint.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_Integer.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_LoadStore.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_LoadStoreFloating.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_LoadStorePaired.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_Paired.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/JitRegCache.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64/Jit_SystemRegisters.cpp \
+					$(COREDIR)/Core/PowerPC/Jit64Common/Jit64AsmCommon.cpp
+endif
+
+SOURCES_CXX += $(COREDIR)/Core/PowerPC/JitCommon/JitBackpatch.cpp \
+					$(COREDIR)/Core/PowerPC/JitCommon/Jit_Util.cpp \
+					$(COREDIR)/Core/PowerPC/JitCommon/TrampolineCache.cpp
+
+#libusb 
+#SOURCES_CXX += $(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_hid.cpp \
+					 $(COREDIR)/Core/HW/SI_GCAdapter.cpp
+
+# Unix-only
+#SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp \
+					$(COREDIR)/Core/HW/WiimoteReal/IONix.cpp
