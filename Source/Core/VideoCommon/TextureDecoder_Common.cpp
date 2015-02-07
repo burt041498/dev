@@ -3,6 +3,7 @@
 // Refer to the license.txt file included.
 
 #include <cmath>
+#include <algorithm>
 
 #include "Common/Common.h"
 
@@ -177,8 +178,8 @@ static const char* texfmt[] = {
 
 static void TexDecoder_DrawOverlay(u8 *dst, int width, int height, int texformat)
 {
-	int w = std::min(width, 40);
-	int h = std::min(height, 10);
+	int w = (std::min)(width, 40);
+	int h = (std::min)(height, 10);
 
 	int xoff = (width - w) >> 1;
 	int yoff = (height - h) >> 1;

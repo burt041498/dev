@@ -84,7 +84,7 @@ static void regMarkUse(RegInfo& R, InstLoc I, InstLoc Op, unsigned OpNum)
 	if (info < 2)
 		info++;
 
-	R.lastUsed[Op - R.FirstI] = std::max(R.lastUsed[Op - R.FirstI], I);
+	R.lastUsed[Op - R.FirstI] = (std::max)(R.lastUsed[Op - R.FirstI], I);
 }
 
 static unsigned regReadUse(RegInfo& R, InstLoc I)

@@ -82,8 +82,8 @@ struct BlockRegStats
 	int GetTotalNumAccesses(int reg) {return numReads[reg] + numWrites[reg];}
 	int GetUseRange(int reg)
 	{
-		return std::max(lastRead[reg], lastWrite[reg]) -
-			   std::min(firstRead[reg], firstWrite[reg]);
+		return (std::max)(lastRead[reg], lastWrite[reg]) -
+			   (std::min)(firstRead[reg], firstWrite[reg]);
 	}
 
 	bool IsUsed(int reg)

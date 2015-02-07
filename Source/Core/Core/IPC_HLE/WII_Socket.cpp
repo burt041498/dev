@@ -600,7 +600,7 @@ void WiiSockMan::Update()
 			FD_SET(sock.fd, &read_fds);
 			FD_SET(sock.fd, &write_fds);
 			FD_SET(sock.fd, &except_fds);
-			nfds = std::max(nfds, sock.fd+1);
+			nfds = (std::max)(nfds, sock.fd+1);
 			++socket_iter;
 		}
 		else

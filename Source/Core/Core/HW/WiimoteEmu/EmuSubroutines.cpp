@@ -545,7 +545,7 @@ void Wiimote::SendReadDataReply(ReadRequest& _request)
 	{
 		// Limit the amt to 16 bytes
 		// AyuanX: the MTU is 640B though... what a waste!
-		const int amt = std::min( (unsigned int)16, _request.size );
+		const int amt = (std::min)( (unsigned int)16, _request.size );
 
 		// no error
 		reply->error = 0;

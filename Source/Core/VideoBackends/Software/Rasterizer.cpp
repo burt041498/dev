@@ -236,12 +236,12 @@ static inline void CalculateLOD(s32* lodp, bool* linear, u32 texmap, u32 texcoor
 		float *uv1 = rasterBlock.Pixel[1][0].Uv[texcoord];
 		float *uv2 = rasterBlock.Pixel[0][1].Uv[texcoord];
 
-		sDelta = std::max(fabsf(uv0[0] - uv1[0]), fabsf(uv0[0] - uv2[0]));
-		tDelta = std::max(fabsf(uv0[1] - uv1[1]), fabsf(uv0[1] - uv2[1]));
+		sDelta = (std::max)(fabsf(uv0[0] - uv1[0]), fabsf(uv0[0] - uv2[0]));
+		tDelta = (std::max)(fabsf(uv0[1] - uv1[1]), fabsf(uv0[1] - uv2[1]));
 	}
 
 	// get LOD in s28.4
-	s32 lod = FixedLog2(std::max(sDelta, tDelta));
+	s32 lod = FixedLog2((std::max)(sDelta, tDelta));
 
 	// bias is s2.5
 	int bias = tm0.lod_bias;
@@ -371,16 +371,16 @@ void DrawTriangleFrontFace(OutputVertexData *v0, OutputVertexData *v1, OutputVer
 	const s32 FDY31 = DY31 << 4;
 
 	// Bounding rectangle
-	s32 minx = (std::min(std::min(X1, X2), X3) + 0xF) >> 4;
-	s32 maxx = (std::max(std::max(X1, X2), X3) + 0xF) >> 4;
-	s32 miny = (std::min(std::min(Y1, Y2), Y3) + 0xF) >> 4;
-	s32 maxy = (std::max(std::max(Y1, Y2), Y3) + 0xF) >> 4;
+	s32 minx = ((std::min)((std::min)(X1, X2), X3) + 0xF) >> 4;
+	s32 maxx = ((std::max)((std::max)(X1, X2), X3) + 0xF) >> 4;
+	s32 miny = ((std::min)((std::min)(Y1, Y2), Y3) + 0xF) >> 4;
+	s32 maxy = ((std::max)((std::max)(Y1, Y2), Y3) + 0xF) >> 4;
 
 	// scissor
-	minx = std::max(minx, scissorLeft);
-	maxx = std::min(maxx, scissorRight);
-	miny = std::max(miny, scissorTop);
-	maxy = std::min(maxy, scissorBottom);
+	minx = (std::max)(minx, scissorLeft);
+	maxx = (std::min)(maxx, scissorRight);
+	miny = (std::max)(miny, scissorTop);
+	maxy = (std::min)(maxy, scissorBottom);
 
 	if (minx >= maxx || miny >= maxy)
 		return;
@@ -524,10 +524,10 @@ void DrawTriangleFrontFace(OutputVertexData *v0, OutputVertexData *v1, OutputVer
 		{
 			if (alphaRes == AlphaTest::PASS)
 			{
-				BoundingBox::coords[BoundingBox::TOP]    = std::min(BoundingBox::coords[BoundingBox::TOP],    (u16) miny);
-				BoundingBox::coords[BoundingBox::LEFT]   = std::min(BoundingBox::coords[BoundingBox::LEFT],   (u16) minx);
-				BoundingBox::coords[BoundingBox::BOTTOM] = std::max(BoundingBox::coords[BoundingBox::BOTTOM], (u16) maxy);
-				BoundingBox::coords[BoundingBox::RIGHT]  = std::max(BoundingBox::coords[BoundingBox::RIGHT],  (u16) maxx);
+				BoundingBox::coords[BoundingBox::TOP]    = (std::min)(BoundingBox::coords[BoundingBox::TOP],    (u16) miny);
+				BoundingBox::coords[BoundingBox::LEFT]   = (std::min)(BoundingBox::coords[BoundingBox::LEFT],   (u16) minx);
+				BoundingBox::coords[BoundingBox::BOTTOM] = (std::max)(BoundingBox::coords[BoundingBox::BOTTOM], (u16) maxy);
+				BoundingBox::coords[BoundingBox::RIGHT]  = (std::max)(BoundingBox::coords[BoundingBox::RIGHT],  (u16) maxx);
 			}
 			return;
 		}
@@ -582,7 +582,7 @@ void DrawTriangleFrontFace(OutputVertexData *v0, OutputVertexData *v1, OutputVer
 		}
 
 		// Update top limit
-		miny = std::max((s32) BoundingBox::coords[BoundingBox::TOP], miny);
+		miny = (std::max)((s32) BoundingBox::coords[BoundingBox::TOP], miny);
 		FTOP = miny << 4;
 
 		// Checking for bbox left
@@ -622,7 +622,7 @@ void DrawTriangleFrontFace(OutputVertexData *v0, OutputVertexData *v1, OutputVer
 		}
 
 		// Update left limit
-		minx = std::max((s32) BoundingBox::coords[BoundingBox::LEFT], minx);
+		minx = (std::max)((s32) BoundingBox::coords[BoundingBox::LEFT], minx);
 
 		// Checking for bbox bottom
 		CY1 = C1 + DX12 * FBOTTOM - DY12 * FRIGHT;
@@ -662,7 +662,7 @@ void DrawTriangleFrontFace(OutputVertexData *v0, OutputVertexData *v1, OutputVer
 		}
 
 		// Update bottom limit
-		maxy = std::min((s32) BoundingBox::coords[BoundingBox::BOTTOM], maxy);
+		maxy = (std::min)((s32) BoundingBox::coords[BoundingBox::BOTTOM], maxy);
 		FBOTTOM = maxy << 4;
 
 		// Checking for bbox right

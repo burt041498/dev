@@ -178,7 +178,7 @@ public:
 			ControlState dist = sqrt(xx*xx + yy*yy);
 
 			// dead zone code
-			dist = std::max(0.0, dist - deadzone);
+			dist = (std::max)(0.0, dist - deadzone);
 			dist /= (1 - deadzone);
 
 			// radius
@@ -189,8 +189,8 @@ public:
 			if (m)
 				dist *= 0.5;
 
-			yy = std::max(-1.0, std::min(1.0, ang_sin * dist));
-			xx = std::max(-1.0, std::min(1.0, ang_cos * dist));
+			yy = (std::max)(-1.0, (std::min)(1.0, ang_sin * dist));
+			xx = (std::max)(-1.0, (std::min)(1.0, ang_cos * dist));
 
 			*y = yy;
 			*x = xx;
@@ -249,7 +249,7 @@ public:
 			const unsigned int trig_count = ((unsigned int) (controls.size()));
 			const ControlState deadzone = settings[0]->value;
 			for (unsigned int i=0; i<trig_count; ++i,++analog)
-				*analog = std::max(controls[i]->control_ref->State() - deadzone, 0.0) / (1 - deadzone);
+				*analog = (std::max)(controls[i]->control_ref->State() - deadzone, 0.0) / (1 - deadzone);
 		}
 	};
 
@@ -320,7 +320,7 @@ public:
 			ControlState ang_cos = cos(ang);
 
 			// the amt a full square stick would have at current angle
-			ControlState square_full = std::min(ang_sin ? 1/fabs(ang_sin) : 2, ang_cos ? 1/fabs(ang_cos) : 2);
+			ControlState square_full = (std::min)(ang_sin ? 1/fabs(ang_sin) : 2, ang_cos ? 1/fabs(ang_cos) : 2);
 
 			// the amt a full stick would have that was (user setting circular) at current angle
 			// I think this is more like a pointed circle rather than a rounded square like it should be
@@ -329,7 +329,7 @@ public:
 			ControlState dist = sqrt(xx*xx + yy*yy);
 
 			// dead zone code
-			dist = std::max(0.0, dist - deadzone * stick_full);
+			dist = (std::max)(0.0, dist - deadzone * stick_full);
 			dist /= (1 - deadzone);
 
 			// circle stick code
@@ -339,8 +339,8 @@ public:
 			if (m)
 				dist *= 0.5;
 
-			yy = std::max(-1.0, std::min(1.0, ang_sin * dist));
-			xx = std::max(-1.0, std::min(1.0, ang_cos * dist));
+			yy = (std::max)(-1.0, (std::min)(1.0, ang_sin * dist));
+			xx = (std::max)(-1.0, (std::min)(1.0, ang_cos * dist));
 
 			// this is kinda silly here
 			// gui being open will make this happen 2x as fast, o well
@@ -349,14 +349,14 @@ public:
 			if (step)
 			{
 				if (xx > m_tilt[0])
-					m_tilt[0] = std::min(m_tilt[0] + 0.1, xx);
+					m_tilt[0] = (std::min)(m_tilt[0] + 0.1, xx);
 				else if (xx < m_tilt[0])
-					m_tilt[0] = std::max(m_tilt[0] - 0.1, xx);
+					m_tilt[0] = (std::max)(m_tilt[0] - 0.1, xx);
 
 				if (yy > m_tilt[1])
-					m_tilt[1] = std::min(m_tilt[1] + 0.1, yy);
+					m_tilt[1] = (std::min)(m_tilt[1] + 0.1, yy);
 				else if (yy < m_tilt[1])
-					m_tilt[1] = std::max(m_tilt[1] - 0.1, yy);
+					m_tilt[1] = (std::max)(m_tilt[1] - 0.1, yy);
 			}
 
 			*y = m_tilt[1] * angle;
@@ -378,9 +378,9 @@ public:
 
 			// silly being here
 			if (zz > m_z)
-				m_z = std::min(m_z + 0.1, zz);
+				m_z = (std::min)(m_z + 0.1, zz);
 			else if (zz < m_z)
-				m_z = std::max(m_z - 0.1, zz);
+				m_z = (std::max)(m_z - 0.1, zz);
 
 			*z = m_z;
 
