@@ -85,7 +85,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_32;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;_ARCH_32;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -99,7 +99,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_64;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;_ARCH_64;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_32;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;_ARCH_32;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -133,7 +133,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_64;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;_ARCH_64;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
