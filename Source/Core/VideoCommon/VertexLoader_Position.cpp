@@ -45,7 +45,7 @@ void LOADERDECL Pos_ReadIndex(VertexLoader* loader)
 	static_assert(N <= 3, "N > 3 is not sane!");
 
 	auto const index = DataRead<I>();
-	loader->m_vertexSkip = index == (std::numeric_limits<I>::max)();
+	loader->m_vertexSkip = index == std::numeric_limits<I>::max();
 	auto const data = reinterpret_cast<const T*>(cached_arraybases[ARRAY_POSITION] + (index * g_main_cp_state.array_strides[ARRAY_POSITION]));
 	auto const scale = loader->m_posScale;
 	DataReader dst(g_vertex_manager_write_ptr, nullptr);

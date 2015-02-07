@@ -775,7 +775,7 @@ IPCCommandResult CWII_IPC_HLE_Device_net_ip_top::IOCtl(u32 _CommandAddress)
 		u32 optname = Memory::Read_U32(BufferIn + 8);
 		u32 optlen = Memory::Read_U32(BufferIn + 0xc);
 		u8 optval[20];
-		optlen = (std::min)(optlen, (u32)sizeof(optval));
+		optlen = std::min(optlen, (u32)sizeof(optval));
 		Memory::CopyFromEmu(optval, BufferIn + 0x10, optlen);
 
 		INFO_LOG(WII_IPC_NET, "IOCTL_SO_SETSOCKOPT(%08x, %08x, %08x, %08x) "

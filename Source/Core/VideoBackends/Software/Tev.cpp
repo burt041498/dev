@@ -772,10 +772,10 @@ void Tev::Draw()
 	}
 
 	// branchless bounding box update
-	BoundingBox::coords[BoundingBox::LEFT] = (std::min)((u16)Position[0], BoundingBox::coords[BoundingBox::LEFT]);
-	BoundingBox::coords[BoundingBox::RIGHT] = (std::max)((u16)Position[0], BoundingBox::coords[BoundingBox::RIGHT]);
-	BoundingBox::coords[BoundingBox::TOP] = (std::min)((u16)Position[1], BoundingBox::coords[BoundingBox::TOP]);
-	BoundingBox::coords[BoundingBox::BOTTOM] = (std::max)((u16)Position[1], BoundingBox::coords[BoundingBox::BOTTOM]);
+	BoundingBox::coords[BoundingBox::LEFT] = std::min((u16)Position[0], BoundingBox::coords[BoundingBox::LEFT]);
+	BoundingBox::coords[BoundingBox::RIGHT] = std::max((u16)Position[0], BoundingBox::coords[BoundingBox::RIGHT]);
+	BoundingBox::coords[BoundingBox::TOP] = std::min((u16)Position[1], BoundingBox::coords[BoundingBox::TOP]);
+	BoundingBox::coords[BoundingBox::BOTTOM] = std::max((u16)Position[1], BoundingBox::coords[BoundingBox::BOTTOM]);
 
 	// if we are only calculating the bounding box,
 	// there's no need to actually draw anything

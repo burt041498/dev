@@ -14,7 +14,7 @@ using namespace Gen;
 
 void Jit64::GenerateConstantOverflow(s64 val)
 {
-	GenerateConstantOverflow(val > (std::numeric_limits<s32>::max)() || val < (std::numeric_limits<s32>::min)());
+	GenerateConstantOverflow(val > std::numeric_limits<s32>::max() || val < std::numeric_limits<s32>::min());
 }
 
 void Jit64::GenerateConstantOverflow(bool overflow)

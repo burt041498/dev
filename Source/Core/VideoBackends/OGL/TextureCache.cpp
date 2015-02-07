@@ -51,8 +51,8 @@ bool SaveTexture(const std::string& filename, u32 textarget, u32 tex, int virtua
 {
 	if (GLInterface->GetMode() != GLInterfaceMode::MODE_OPENGL)
 		return false;
-	int width = (std::max)(virtual_width >> level, 1);
-	int height = (std::max)(virtual_height >> level, 1);
+	int width = std::max(virtual_width >> level, 1);
+	int height = std::max(virtual_height >> level, 1);
 	std::vector<u8> data(width * height * 4);
 	glActiveTexture(GL_TEXTURE0+9);
 	glBindTexture(textarget, tex);
@@ -138,9 +138,9 @@ void TextureCache::TCacheEntry::Load(unsigned int width, unsigned int height,
 {
 	if (level >= config.levels)
 		PanicAlert("Texture only has %d levels, can't update level %d", config.levels, level);
-	if (width != (std::max)(1u, config.width >> level) || height != (std::max)(1u, config.height >> level))
+	if (width != std::max(1u, config.width >> level) || height != std::max(1u, config.height >> level))
 		PanicAlert("size of level %d must be %dx%d, but %dx%d requested",
-		           level, (std::max)(1u, config.width >> level), (std::max)(1u, config.height >> level), width, height);
+		           level, std::max(1u, config.width >> level), std::max(1u, config.height >> level), width, height);
 
 	glActiveTexture(GL_TEXTURE0+9);
 	glBindTexture(GL_TEXTURE_2D_ARRAY, texture);

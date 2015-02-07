@@ -885,7 +885,7 @@ static const __m128i GC_ALIGNED16(single_qnan_bit) = _mm_set_epi64x(0xffffffffff
 static const __m128i GC_ALIGNED16(double_qnan_bit) = _mm_set_epi64x(0xffffffffffffffff, 0xfff7ffffffffffff);
 
 // Smallest positive double that results in a normalized single.
-static const double GC_ALIGNED16(min_norm_single) = (std::numeric_limits<float>::min)();
+static const double GC_ALIGNED16(min_norm_single) = std::numeric_limits<float>::min();
 
 void EmuCodeBlock::ConvertDoubleToSingle(X64Reg dst, X64Reg src)
 {

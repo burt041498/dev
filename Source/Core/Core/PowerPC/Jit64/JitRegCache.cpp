@@ -152,7 +152,7 @@ float RegCache::ScoreRegister(X64Reg xr)
 		// Don't look too far ahead; we don't want to have quadratic compilation times for
 		// enormous block sizes!
 		// This actually improves register allocation a tiny bit; I'm not sure why.
-		u32 lookahead = (std::min)(jit->js.instructionsLeft, 64);
+		u32 lookahead = std::min(jit->js.instructionsLeft, 64);
 		// Count how many other registers are going to be used before we need this one again.
 		u32 regs_in_count = CountRegsIn(preg, lookahead).Count();
 		// Totally ad-hoc heuristic to bias based on how many other registers we'll need
@@ -178,7 +178,7 @@ X64Reg RegCache::GetFreeXReg()
 
 	// Okay, not found; run the register allocator heuristic and figure out which register we should
 	// clobber.
-	float min_score = (std::numeric_limits<float>::max)();
+	float min_score = std::numeric_limits<float>::max();
 	X64Reg best_xreg = INVALID_REG;
 	size_t best_preg = 0;
 	for (size_t i = 0; i < aCount; i++)
