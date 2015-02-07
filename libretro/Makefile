@@ -18,11 +18,9 @@ endif
 
 # Target Dynarec
 WITH_DYNAREC = $(ARCH)
-FFMPEG_ARCH = $(ARCH)
 
 ifeq ($(ARCH), $(filter $(ARCH), i386 i686))
 	WITH_DYNAREC = x86
-	FFMPEG_ARCH = x86
 endif
 
 ifeq ($(platform),)
@@ -41,7 +39,6 @@ endif
 
 # Dirs
 ROOTDIR			= ../Source
-FFMPEGDIR		= $(ROOTDIR)/ffmpeg
 LIBRETRODIR		= $(ROOTDIR)/../libretro
 COREDIR			= $(ROOTDIR)/Core
 CORECOMMONDIR  = $(ROOTDIR)/Core/Common
@@ -53,18 +50,12 @@ EXTDIR			= ../Externals
 
 TARGET_NAME := dolphin
 CC_AS ?= $(CC)
-FFMPEGINCFLAGS :=
-FFMPEGLIBDIR :=
-FFMPEGLIBS :=
 
 # Unix
 ifneq (,$(findstring unix,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro.so
 	LDFLAGS += -shared -Wl,--version-script=link.T -Wl,--no-undefined
 
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/linux/$(FFMPEG_ARCH)/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/linux/$(FFMPEG_ARCH)/lib
-	FFMPEGLDFLAGS += -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
 	fpic = -fPIC
 	ifneq (,$(findstring gles,$(platform)))
 		GLES = 1
@@ -97,9 +88,6 @@ else ifneq (,$(findstring imx6,$(platform)))
 	PLATFORM_EXT := unix
 	WITH_DYNAREC=arm
 	HAVE_NEON=1
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/linux/armv7/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/linux/armv7/lib
-	FFMPEGLDFLAGS += -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
 
 # OS X
 else ifneq (,$(findstring osx,$(platform)))
@@ -113,9 +101,6 @@ else ifneq (,$(findstring osx,$(platform)))
 		LDFLAGS += -stdlib=libc++
 	fpic = -fPIC
 
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/macosx/$(FFMPEG_ARCH)/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/macosx/$(FFMPEG_ARCH)/lib
-	FFMPEGLDFLAGS += -liconv -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
 	PLATCFLAGS += -D__MACOSX__
 	GL_LIB := -framework OpenGL
 	PLATFORM_EXT := unix
@@ -130,9 +115,6 @@ else ifneq (,$(findstring ios,$(platform)))
 	GL_LIB := -framework OpenGLES
 	HAVE_NEON = 1
 
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/ios/universal/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/ios/universal/lib
-	FFMPEGLDFLAGS += -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
 
 	ifeq ($(IOSSDK),)
 		IOSSDK := $(shell xcrun -sdk iphoneos -show-sdk-path)
@@ -171,10 +153,6 @@ else ifneq (,$(findstring android,$(platform)))
 	CFLAGS += -DANDROID
 	LDFLAGS += -llog -lGLESv2 -lEGL
 
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/android/armv7/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/android/armv7/lib
-	FFMPEGLDFLAGS += -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
-
 	PLATFORM_EXT := unix
 
 # QNX
@@ -204,9 +182,6 @@ else ifneq (,$(findstring armv,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
 	LDFLAGS += -shared -Wl,--version-script=link.T -Wl,--no-undefined
-	FFMPEGINCFLAGS += -I$(FFMPEGDIR)/linux/$(FFMPEG_ARCH)/include
-	FFMPEGLIBDIR := $(FFMPEGDIR)/linux/$(FFMPEG_ARCH)/lib
-	FFMPEGLDFLAGS += -L$(FFMPEGLIBDIR) -lavformat -lavcodec -lavutil -lswresample -lswscale
 	INCFLAGS += -I.
 	WITH_DYNAREC=arm
 	ifneq (,$(findstring gles,$(platform)))
@@ -278,7 +253,7 @@ else
 	GLFLAGS += -DHAVE_OPENGL
 endif
 
-COREFLAGS += -D__LIBRETRO__ -DINLINE="inline" -DUSE_FFMPEG -DBAKE_IN_GIT -DFSML_STATIC
+COREFLAGS += -D__LIBRETRO__ -DINLINE="inline" -DBAKE_IN_GIT -DFSML_STATIC
 
 ifeq ($(DEBUG), 1)
 	CPUOPTS += -O0 -g
@@ -292,7 +267,7 @@ OBJECTS		+= $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(ASMFILES:.S=.o)
 CXXFLAGS	+= -std=c++11 $(CPUOPTS) $(COREFLAGS) $(INCFLAGS) $(PLATCFLAGS) $(fpic) $(PLATCFLAGS) $(CPUFLAGS) $(GLFLAGS) $(DYNAFLAGS) 
 CFLAGS		+= $(CPUOPTS) $(COREFLAGS) $(INCFLAGS) $(PLATCFLAGS) $(fpic) $(PLATCFLAGS) $(CPUFLAGS) $(GLFLAGS) $(DYNAFLAGS)
 
-LDFLAGS		+= -lm -ldl -lrt -lz $(FFMPEGLDFLAGS) $(fpic)
+LDFLAGS		+= -lm -ldl -lrt -lz $(fpic)
 ifeq (,$(findstring android,$(platform)))
 	LDFLAGS		+= -lpthread
 endif
