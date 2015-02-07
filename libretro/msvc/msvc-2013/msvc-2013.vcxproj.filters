@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\libretro">
+      <UniqueIdentifier>{8a3c6486-206c-4fb0-8d3e-873c41c273a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals">
+      <UniqueIdentifier>{87d8001c-c103-4cbd-930e-ac193dcf6a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\polarssl">
+      <UniqueIdentifier>{f052a80d-439b-43fd-adb0-812fb7b1ffca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\zlib">
+      <UniqueIdentifier>{396c8961-a805-4cad-8bc2-6c68126dce44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\libpng">
+      <UniqueIdentifier>{c0e753e6-5b41-4c22-be17-7b7e666a0b02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\Bochs_disasm">
+      <UniqueIdentifier>{8e9b2f17-f6db-4010-b0c3-3771cb0eb279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\LZO">
+      <UniqueIdentifier>{99b2419d-32bc-4ac8-99ef-1f04984d3305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\SFML">
+      <UniqueIdentifier>{f04f953d-6c89-414d-9888-ef247a882a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\xxhash">
+      <UniqueIdentifier>{0d8ad12a-4775-48db-9d3a-71a2e5bd7cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Externals\SOIL">
+      <UniqueIdentifier>{d925d1cd-3671-48d4-9f57-1ab62981f38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{9ee25ad7-9a0c-4cef-820d-e14e867152e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Core">
+      <UniqueIdentifier>{5f382567-8e6f-44a3-892f-c4937d8a64c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\AudioCommon">
+      <UniqueIdentifier>{b44417f3-ef2d-4601-8014-4cbd6f1b91cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Host.cpp">
+      <Filter>Source Files\libretro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro.cpp">
+      <Filter>Source Files\libretro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\aes.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\aesni.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\arc4.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\asn1parse.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\asn1write.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\base64.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\bignum.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\blowfish.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\camellia.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ccm.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\certs.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\cipher.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\cipher_wrap.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ctr_drbg.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\debug.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\des.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\dhm.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ecdh.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ecdsa.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ecp.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ecp_curves.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\entropy.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\entropy_poll.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\error.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\gcm.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\havege.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\hmac_drbg.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\md.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\md_wrap.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\md2.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\md4.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\md5.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\memory_buffer_alloc.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\net.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\oid.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\padlock.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pbkdf2.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pem.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pk.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pk_wrap.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pkcs5.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pkcs11.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pkcs12.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pkparse.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\pkwrite.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\platform.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ripemd160.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\rsa.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\sha1.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\sha256.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\sha512.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ssl_cache.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ssl_ciphersuites.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ssl_cli.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ssl_srv.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\ssl_tls.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\threading.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\timing.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\version.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\version_features.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509_create.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509_crl.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509_crt.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509_csr.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509write_crt.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\x509write_csr.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\polarssl\library\xtea.c">
+      <Filter>Source Files\Externals\polarssl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\adler32.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\compress.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\crc32.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\deflate.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\gzclose.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\gzlib.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\gzread.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\gzwrite.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\infback.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\inffast.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\inflate.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\inftrees.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\trees.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\uncompr.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\zlib\zutil.c">
+      <Filter>Source Files\Externals\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\png.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngerror.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pnggccrd.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngget.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngmem.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngpread.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngread.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngrio.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngrtran.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngrutil.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngset.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngtest.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngtrans.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngvcrd.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngwio.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngwrite.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngwtran.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\libpng\pngwutil.c">
+      <Filter>Source Files\Externals\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\Bochs_disasm\dis_decode.cpp">
+      <Filter>Source Files\Externals\Bochs_disasm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\Bochs_disasm\dis_groups.cpp">
+      <Filter>Source Files\Externals\Bochs_disasm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\Bochs_disasm\resolve.cpp">
+      <Filter>Source Files\Externals\Bochs_disasm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\Bochs_disasm\syntax.cpp">
+      <Filter>Source Files\Externals\Bochs_disasm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\LZO\minilzo.c">
+      <Filter>Source Files\Externals\LZO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\System\Err.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\System\String.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\System\Time.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\Http.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\IPAddress.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\Packet.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\Socket.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\SocketSelector.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\TcpListener.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\TcpSocket.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\UdpSocket.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SFML\src\SFML\Network\Win32\SocketImpl.cpp">
+      <Filter>Source Files\Externals\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\xxhash\xxhash.c">
+      <Filter>Source Files\Externals\xxhash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\xxhash\xxhsum.c">
+      <Filter>Source Files\Externals\xxhash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SOIL\image_DXT.c">
+      <Filter>Source Files\Externals\SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SOIL\image_helper.c">
+      <Filter>Source Files\Externals\SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SOIL\SOIL.c">
+      <Filter>Source Files\Externals\SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Externals\SOIL\stb_image_aug.c">
+      <Filter>Source Files\Externals\SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\AudioCommon.cpp">
+      <Filter>Source Files\Core\AudioCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\DPL2Decoder.cpp">
+      <Filter>Source Files\Core\AudioCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\Mixer.cpp">
+      <Filter>Source Files\Core\AudioCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\NullSoundStream.cpp">
+      <Filter>Source Files\Core\AudioCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\WaveFile.cpp">
+      <Filter>Source Files\Core\AudioCommon</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
