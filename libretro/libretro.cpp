@@ -39,9 +39,9 @@
 
 static Common::Event updateMainFrameEvent;
 
-static struct retro_hw_render_callback hw_render;
+struct retro_hw_render_callback hw_render;
 static retro_log_printf_t log_cb;
-static retro_video_refresh_t video_cb;
+retro_video_refresh_t video_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 static retro_input_poll_t input_poll_cb;
 static retro_input_state_t input_state_cb;
@@ -300,8 +300,6 @@ void retro_run(void)
 
    if (PowerPC::GetState() != PowerPC::CPU_POWERDOWN)
       updateMainFrameEvent.Wait();
-
-   video_cb(RETRO_HW_FRAME_BUFFER_VALID, 640, 480, 0);
 }
 
 void retro_unload_game(void)

@@ -3,6 +3,7 @@ INCFLAGS := \
 	-I$(COREDIR) \
 	-I$(COREDIR)/VideoCommon \
 	-I$(CORECOMMONDIR) \
+	-I$(LIBRETRODIR) \
 	-I$(EXTDIR)/GL \
 	-I$(EXTDIR)/libpng \
 	-I$(EXTDIR)/SOIL \

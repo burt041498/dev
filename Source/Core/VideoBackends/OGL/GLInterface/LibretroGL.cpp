@@ -9,17 +9,23 @@
 #include "VideoCommon/RenderBase.h"
 #include "VideoCommon/VideoConfig.h"
 
+#include "libretro.h"
+
+extern struct retro_hw_render_callback hw_render;
+extern retro_video_refresh_t video_cb;
+
 void cInterfaceLibretroGL::SwapInterval(int Interval)
 {
 }
 
 void* cInterfaceLibretroGL::GetFuncAddress(const std::string& name)
 {
-   /* call proc address function here. */
+   return (void*)hw_render.get_proc_address(name.c_str());
 }
 
 void cInterfaceLibretroGL::Swap()
 {
+   video_cb(RETRO_HW_FRAME_BUFFER_VALID, 640, 480, 0);
 }
 
 // Create rendering window.
