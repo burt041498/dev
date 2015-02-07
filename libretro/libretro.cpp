@@ -3,6 +3,29 @@
 #include <string>
 #include <cstring>
 
+#include "Common/CommonPaths.h"
+#include "Common/CommonTypes.h"
+#include "Common/CPUDetect.h"
+#include "Common/Event.h"
+#include "Common/FileUtil.h"
+#include "Common/Logging/LogManager.h"
+#include "Core/BootManager.h"
+#include "Core/ConfigManager.h"
+#include "Core/Core.h"
+#include "Core/Host.h"
+#include "Core/State.h"
+#include "Core/HW/Wiimote.h"
+#include "Core/PowerPC/PowerPC.h"
+
+#include "DiscIO/BannerLoader.h"
+#include "DiscIO/Filesystem.h"
+#include "DiscIO/VolumeCreator.h"
+
+#include "UICommon/UICommon.h"
+
+#include "VideoCommon/OnScreenDisplay.h"
+#include "VideoCommon/VideoBackendBase.h"
+
 #ifdef _WIN32
 // for MAX_PATH
 #include <windows.h>
@@ -13,6 +36,8 @@
 #endif
 
 #define SAMPLERATE 44100
+
+static Common::Event updateMainFrameEvent;
 
 static struct retro_hw_render_callback hw_render;
 static retro_log_printf_t log_cb;
@@ -83,10 +108,14 @@ void retro_init(void)
       retro_base_dir = retro_base_dir.substr(0, last);
       retro_base_dir_found = true;
    }
+
+	UICommon::Init();
 }
 
 void retro_deinit(void)
 {
+   Core::Shutdown();
+   UICommon::Shutdown();
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device)
@@ -222,6 +251,12 @@ bool retro_load_game(const struct retro_game_info *game)
 
    check_variables();
 
+	if (!BootManager::BootCore(game->path))
+      return false;
+
+	PowerPC::Start();
+   Core::SetState(Core::CORE_RUN);
+
    return true;
 }
 
@@ -263,11 +298,17 @@ void retro_run(void)
    if (input_poll_cb)
       input_poll_cb();
 
+   if (PowerPC::GetState() != PowerPC::CPU_POWERDOWN)
+      updateMainFrameEvent.Wait();
+
    video_cb(RETRO_HW_FRAME_BUFFER_VALID, 640, 480, 0);
 }
 
 void retro_unload_game(void)
 {
+   Core::SetState(Core::CORE_PAUSE);
+   Core::Stop();
+   updateMainFrameEvent.Set(); // Kick the waiting event
 }
 
 unsigned retro_get_region(void)

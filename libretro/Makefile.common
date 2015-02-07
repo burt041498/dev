@@ -544,5 +544,7 @@ SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp
 
 SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/IODummy.cpp
 
+SOURCES_CXX += $(COREDIR)/UICommon/UICommon.cpp
+
 SOURCES_CXX += $(LIBRETRODIR)/Host.cpp \
 					$(LIBRETRODIR)/libretro.cpp

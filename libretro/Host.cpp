@@ -36,7 +36,7 @@ bool Host_RendererHasFocus()
 
 bool Host_UIHasFocus()
 {
-   return false;
+   return true;
 }
 
 bool Host_RendererIsFullscreen()
