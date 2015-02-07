@@ -12,6 +12,7 @@ INCFLAGS := \
 	-I$(EXTDIR)/polarssl/include \
 	-I$(EXTDIR)/SFML/include \
 	-I$(EXTDIR)/SFML/src \
+	-I$(EXTDIR)/LZO \
 	-I$(EXTDIR)/xxhash 
 
 # Target PolarSSL
