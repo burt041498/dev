@@ -69,7 +69,7 @@ void Host_SetStartupDebuggingParameters()
 	SCoreStartupParameter& StartUp = SConfig::GetInstance().m_LocalCoreStartupParameter;
 	StartUp.bEnableDebugging = false;
 	StartUp.bBootToPause = false;
-   Startup.bJITOff = true;
+   StartUp.bJITOff = true;
 }
 
 void Host_SetWiiMoteConnectionState(int state)
