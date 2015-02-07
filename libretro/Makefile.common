@@ -202,11 +202,11 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/x64Emitter.cpp
 
 ifeq ($(WITH_DYNAREC), x86_64)
-CPUFLAGS := -msse -msse2 -D_M_X86_64 -D_ARCH_64
+CPUFLAGS := -msse -msse2 -D_M_X86 -D_M_X86_64 -D_ARCH_64
 SOURCES_CXX += $(CORECOMMONDIR)/x64FPURoundMode.cpp \
 					$(CORECOMMONDIR)/x64CPUDetect.cpp
 else
-CPUFLAGS := -msse -msse2 -D_M_X86 -D_ARCH_32
+CPUFLAGS := -msse -msse2 -D_M_X86 -D_M_X86_32 -D_ARCH_32
 SOURCES_CXX += $(CORECOMMONDIR)/GenericCPUDetect.cpp \
 					$(CORECOMMONDIR)/GenericFPURoundMode.cpp
 endif
