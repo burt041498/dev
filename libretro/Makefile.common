@@ -84,6 +84,23 @@ SOURCES_C   += $(EXTDIR)/polarssl/library/aes.c \
 					$(EXTDIR)/polarssl/library/x509write_csr.c \
 					$(EXTDIR)/polarssl/library/xtea.c
 
+# Target zlib
+SOURCES_C   += $(EXTDIR)/zlib/adler32.c \
+					$(EXTDIR)/zlib/compress.c \
+					$(EXTDIR)/zlib/crc32.c \
+					$(EXTDIR)/zlib/deflate.c \
+					$(EXTDIR)/zlib/gzclose.c \
+					$(EXTDIR)/zlib/gzlib.c \
+					$(EXTDIR)/zlib/gzread.c \
+					$(EXTDIR)/zlib/gzwrite.c \
+					$(EXTDIR)/zlib/inflate.c \
+					$(EXTDIR)/zlib/infback.c \
+					$(EXTDIR)/zlib/inftrees.c \
+					$(EXTDIR)/zlib/inffast.c \
+					$(EXTDIR)/zlib/trees.c \
+					$(EXTDIR)/zlib/uncompr.c \
+					$(EXTDIR)/zlib/zutil.c
+
 # Target libpng
 SOURCES_C   += $(EXTDIR)/libpng/png.c \
 					$(EXTDIR)/libpng/pngerror.c \
