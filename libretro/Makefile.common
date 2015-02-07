@@ -4,6 +4,7 @@ INCFLAGS := \
 	-I$(COREDIR)/VideoCommon \
 	-I$(CORECOMMONDIR) \
 	-I$(EXTDIR)/GL \
+	-I$(EXTDIR)/libpng \
 	-I$(EXTDIR)/SOIL \
 	-I$(EXTDIR)/Bochs_disasm \
 	-I$(EXTDIR)/polarssl/include \
@@ -175,14 +176,14 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/Crypto/bn.cpp \
 					$(CORECOMMONDIR)/Crypto/ec.cpp \
 					$(CORECOMMONDIR)/Logging/ConsoleListener.cpp \
-					$(CORECOMMONDIR)/Logging/LogManager.cpp
+					$(CORECOMMONDIR)/Logging/LogManager.cpp \
+					$(CORECOMMONDIR)/x64ABI.cpp \
+					$(CORECOMMONDIR)/x64Analyzer.cpp \
+					$(CORECOMMONDIR)/x64Emitter.cpp
 
 ifeq ($(WITH_DYNAREC), x86_64)
 CPUFLAGS := -msse -msse2 -D_M_X86_64 -D_ARCH_64
-SOURCES_CXX += $(CORECOMMONDIR)/x64ABI.cpp \
-					$(CORECOMMONDIR)/x64Analyzer.cpp \
-					$(CORECOMMONDIR)/x64Emitter.cpp \
-					$(CORECOMMONDIR)/x64FPURoundMode.cpp \
+SOURCES_CXX += $(CORECOMMONDIR)/x64FPURoundMode.cpp \
 					$(CORECOMMONDIR)/x64CPUDetect.cpp
 else
 	CPUFLAGS := -msse -msse2 -D_M_X86 -D_ARCH_32
@@ -306,9 +307,14 @@ SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \
 					$(COREDIR)/VideoCommon/VideoConfig.cpp \
 					$(COREDIR)/VideoCommon/VideoState.cpp \
 					$(COREDIR)/VideoCommon/XFMemory.cpp \
-					$(COREDIR)/VideoCommon/XFStructs.cpp \
-					$(COREDIR)/VideoCommon/TextureDecoder_x64.cpp \
-					$(COREDIR)/VideoCommon/VertexLoaderX64.cpp \
+					$(COREDIR)/VideoCommon/XFStructs.cpp
+
+ifeq ($(WITH_DYNAREC), x86_64)
+SOURCES_CXX += $(COREDIR)/VideoCommon/TextureDecoder_x64.cpp \
+					$(COREDIR)/VideoCommon/VertexLoaderX64.cpp
+else
+SOURCES_CXX += $(COREDIR)/VideoCommon/TextureDecoder_Generic.cpp
+endif
 
 #SOURCES_CXX += $(COREDIR)/VideoCommon/AVIDump.cpp
 
