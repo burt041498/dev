@@ -39,18 +39,12 @@
 
 extern Common::Event updateMainFrameEvent;
 
-struct retro_hw_render_callback hw_render;
-static retro_log_printf_t log_cb;
+retro_log_printf_t log_cb;
 retro_video_refresh_t video_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 static retro_input_poll_t input_poll_cb;
 static retro_input_state_t input_state_cb;
-static retro_environment_t environ_cb;
-
-extern "C"
-{
-retro_hw_get_proc_address_t libretro_get_proc_address;
-}
+retro_environment_t environ_cb;
 
 void retro_set_environment(retro_environment_t cb)
 {
@@ -170,12 +164,6 @@ static void extract_directory(char *buf, const char *path, size_t size)
    }
 }
 
-static void context_reset(void)
-{
-   if (log_cb)
-      log_cb(RETRO_LOG_INFO, "Context reset!\n");
-}
-
 static void check_variables(void)
 {
    struct retro_variable var;
@@ -236,19 +224,6 @@ bool retro_load_game(const struct retro_game_info *game)
          log_cb(RETRO_LOG_ERROR, "XRGB8888 is not supported.\n");
       return false;
    }
-
-#ifdef USING_GLES2
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES2;
-#else
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
-#endif
-   hw_render.context_reset = context_reset;
-   hw_render.bottom_left_origin = true;
-   hw_render.depth = true;
-   if (!environ_cb(RETRO_ENVIRONMENT_SET_HW_RENDER, &hw_render))
-      return false;
-
-   libretro_get_proc_address = hw_render.get_proc_address;
 
    check_variables();
 
