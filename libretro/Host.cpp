@@ -3,7 +3,12 @@
 // Refer to the license.txt file included.
 
 #include "Common/MsgHandler.h"
+#include "Common/Event.h"
 #include "Core/Host.h"
+#include "Core/ConfigManager.h"
+#include "Core/CoreParameter.h"
+
+Common::Event updateMainFrameEvent;
 
 void Host_Message(int id)
 {
@@ -12,7 +17,7 @@ void Host_Message(int id)
 
 void Host_UpdateMainFrame()
 {
-	// TODO
+   updateMainFrameEvent.Set();
 }
 
 void Host_UpdateTitle(const std::string& title)
@@ -36,7 +41,7 @@ bool Host_RendererHasFocus()
 
 bool Host_UIHasFocus()
 {
-   return true;
+   return false;
 }
 
 bool Host_RendererIsFullscreen()
@@ -61,7 +66,9 @@ void Host_UpdateDisasmDialog()
 
 void Host_SetStartupDebuggingParameters()
 {
-	// TODO
+	SCoreStartupParameter& StartUp = SConfig::GetInstance().m_LocalCoreStartupParameter;
+	StartUp.bEnableDebugging = false;
+	StartUp.bBootToPause = false;
 }
 
 void Host_SetWiiMoteConnectionState(int state)

@@ -37,7 +37,7 @@
 
 #define SAMPLERATE 44100
 
-static Common::Event updateMainFrameEvent;
+extern Common::Event updateMainFrameEvent;
 
 struct retro_hw_render_callback hw_render;
 static retro_log_printf_t log_cb;
@@ -109,6 +109,7 @@ void retro_init(void)
       retro_base_dir_found = true;
    }
 
+   UICommon::CreateDirectories();
 	UICommon::Init();
 }
 
