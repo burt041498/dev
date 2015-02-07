@@ -2,7 +2,6 @@
 // Licensed under GPLv2+
 // Refer to the license.txt file included.
 
-#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
@@ -29,7 +28,7 @@ Profiler::Profiler(const std::string& name)
 : m_name(name), m_usecs(0), m_usecs_min(-1), m_usecs_max(0), m_usecs_quad(0), m_calls(0), m_depth(0)
 {
 	m_time = Common::Timer::GetTimeUs();
-	s_max_length = (std::max<u32>)(s_max_length, u32(m_name.length()));
+	s_max_length = std::max<u32>(s_max_length, u32(m_name.length()));
 
 	s_all_profilers.push_back(this);
 }
@@ -92,8 +91,8 @@ void Profiler::Stop()
 		u64 diff = end - m_time;
 
 		m_usecs += diff;
-		m_usecs_min = (std::min)(m_usecs_min, diff);
-		m_usecs_max = (std::max)(m_usecs_max, diff);
+		m_usecs_min = std::min(m_usecs_min, diff);
+		m_usecs_max = std::max(m_usecs_max, diff);
 		m_usecs_quad += diff * diff;
 		m_calls++;
 	}
