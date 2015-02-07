@@ -85,7 +85,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_32;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -99,7 +99,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_64;_DEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_32;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_GENERIC</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -133,7 +133,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_ARCH_64;NDEBUG;_WINDOWS;_USRDLL;MSVC2010_EXPORTS;%(PreprocessorDefinitions);__LIBRETRO__;SFML_STATIC;_M_X86_64</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\;$(ProjectDir)\..\..\..\Source\Core;$(ProjectDir)\..\..\..\Source\VideoCommon;$(ProjectDir)\..\..\..\Source\Common;$(ProjectDir)\..\..\..\Externals\GL;$(ProjectDir)\..\..\..\Externals\libpng;$(ProjectDir)\..\..\..\Externals\SOIL;$(ProjectDir)\..\..\..\Externals\Bochs_disasm;$(ProjectDir)\..\..\..\Externals\polarssl\include;$(ProjectDir)\..\..\..\Externals\SFML\include;$(ProjectDir)\..\..\..\Externals\SFML\src;$(ProjectDir)\..\..\..\Externals\xxhash;$(ProjectDir)\..\..\..\Externals\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -808,11 +808,426 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Core\AudioCommon\AudioCommon.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\AudioCommon\AudioCommonLibretro.cpp" />
     <ClCompile Include="..\..\..\Source\Core\AudioCommon\DPL2Decoder.cpp" />
     <ClCompile Include="..\..\..\Source\Core\AudioCommon\Mixer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\AudioCommon\NullSoundStream.cpp" />
     <ClCompile Include="..\..\..\Source\Core\AudioCommon\WaveFile.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\BreakPoints.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\CDUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\ColorUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Crypto\bn.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Crypto\ec.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\ExtendedTrace.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\FileSearch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\FileUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\GekkoDisassembler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Hash.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\IniFile.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\JitRegister.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Logging\ConsoleListener.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Logging\LogManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\MathUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\MemArena.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\MemoryUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Misc.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\MsgHandler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\NandPaths.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Network.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\PcapFile.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\PerformanceCounter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Profiler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\SDCardUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\SettingsHandler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\StringUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\SymbolDB.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\SysConf.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Thread.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Timer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\Version.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\x64ABI.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\x64Analyzer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\x64CPUDetect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Common\x64FPURoundMode.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\ActionReplay.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\ARDecrypt.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\BootManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\Boot.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\Boot_BS2Emu.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\Boot_DOL.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\Boot_ELF.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\Boot_WiiWAD.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Boot\ElfReader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\ConfigManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Core.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\CoreParameter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\CoreTiming.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Debugger\Debugger_SymbolMap.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Debugger\Dump.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Debugger\PPCDebugInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSPEmulator.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPAccelerator.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPAnalyzer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPAssembler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPCaptureLogger.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPCodeUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPCore.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPDisassembler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPEmitter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPHWInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntArithmetic.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntBranch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntCCUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPInterpreter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntExtOps.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntLoadStore.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntMisc.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPIntMultiplier.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPMemoryMap.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPStacks.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\DSPTables.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitArithmetic.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitBranch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitCCUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitExtOps.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitLoadStore.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitMisc.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitMultiplier.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\Jit\DSPJitRegCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\DSP\LabelMap.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\ec_wii.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoAnalyzer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoDataFile.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoPlaybackAnalyzer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoPlayer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoRecordAnalyzer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\FifoPlayer\FifoRecorder.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\GeckoCode.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\GeckoCodeConfig.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HLE\HLE.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HLE\HLE_Misc.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HLE\HLE_OS.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HotkeyManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\AudioInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\BBA-TAP\TAP_Win32.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\CPU.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSP.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\DSPHLE.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\MailHandler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\AX.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\AXWii.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\CARD.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\GBA.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\INIT.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\ROM.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\UCodes.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\Zelda.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\ZeldaADPCM.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\ZeldaSynth.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPHLE\UCodes\ZeldaVoice.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPDebugInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPHost.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPLLE.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPLLEGlobals.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPLLETools.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DSPLLE\DSPSymbols.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\DVDInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_Channel.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_Device.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceAD16.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceAGP.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceAMBaseboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceEthernet.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceGecko.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceIPL.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceMemoryCard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\EXI_DeviceMic.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCKeyboardEmu.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCMemcard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCMemcardDirectory.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCMemcardRaw.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCPad.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GCPadEmu.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\GPFifo.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\HW.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\Memmap.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\MemmapFunctions.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\MemoryInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\MMIO.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\ProcessorInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_Device.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceAMBaseboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceDanceMat.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceGBA.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceGCController.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceGCSteeringWheel.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_GCAdapter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\Sram.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\StreamADPCM.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\SystemTimers.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\VideoInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\Wiimote.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Attachment.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Classic.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Drums.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Guitar.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Nunchuk.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Attachment\Turntable.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\EmuSubroutines.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Encryption.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\Speaker.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteEmu\WiimoteEmu.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteReal\IOWin.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiimoteReal\WiimoteReal.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WiiSaveCrypted.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\HW\WII_IPC.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\ICMPWin.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WiiMote_HID_Attr.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_DI.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_es.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_FileIO.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_fs.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_hid.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_net.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_net_ssl.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_sdio_slot0.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_usb.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_Device_usb_kbd.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_IPC_HLE_WiiMote.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\IPC_HLE\WII_Socket.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\MemTools.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\Movie.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\NetPlayClient.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\NetPlayServer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PatchEngine.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_Branch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_FloatingPoint.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_Integer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_LoadStore.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_LoadStorePaired.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_Paired.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_SystemRegisters.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Interpreter\Interpreter_Tables.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64IL\IR_X86.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64IL\JitIL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64IL\JitIL_Tables.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit64_Tables.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\JitAsm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\JitRegCache.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_Branch.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_FloatingPoint.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_Integer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_LoadStore.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_LoadStoreFloating.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_LoadStorePaired.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_Paired.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Jit64\Jit_SystemRegisters.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\JitAsmCommon.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\JitBackpatch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\JitBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\JitCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\Jit_Util.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitCommon\TrampolineCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\IR.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_Branch.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_FloatingPoint.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_Integer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_LoadStore.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_LoadStoreFloating.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_LoadStorePaired.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_Paired.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitILCommon\JitILBase_SystemRegisters.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\JitInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\PowerPC.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\PPCAnalyst.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\PPCCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\PPCSymbolDB.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\PPCTables.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\Profiler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\PowerPC\SignatureDB.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\State.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Core\VolumeHandler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\BannerLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\BannerLoaderGC.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\BannerLoaderWii.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\Blob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\CISOBlob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\CompressedBlob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\DiscScrubber.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\DriveBlob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\FileBlob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\FileMonitor.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\Filesystem.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\FileSystemGCWii.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\NANDContentLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeCommon.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeCreator.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeDirectory.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeGC.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeWad.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\VolumeWiiCrypted.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\WbfsBlob.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\DiscIO\WiiWad.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\InputCommon\ControllerEmu.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\InputCommon\ControllerInterface\ControllerInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\InputCommon\ControllerInterface\Device.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\InputCommon\ControllerInterface\ExpressionParser.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\InputCommon\InputConfig.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\UICommon\UICommon.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\BoundingBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\FramebufferManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\GLExtensions\GLExtensions.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\GLInterface\GLInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\GLInterface\LibretroGL.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\GLUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\main.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\NativeVertexFormat.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\PerfQuery.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\PostProcessing.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\ProgramShaderCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\RasterFont.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\Render.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\SamplerCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\StreamBuffer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\TextureCache.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\TextureConverter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\OGL\VertexManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\BPMemLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\Clipper.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\CPMemLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\DebugUtil.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\EfbCopy.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\EfbInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\HwRasterizer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\OpcodeDecoder.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\RasterFont.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\Rasterizer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SetupUnit.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWCommandProcessor.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWmain.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWRenderer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWStatistics.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWVertexLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\SWVideoConfig.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\Tev.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\TextureEncoder.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\TextureSampler.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\TransformUnit.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoBackends\Software\XFMemLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\BoundingBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\BPFunctions.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\BPMemory.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\BPStructs.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\CommandProcessor.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\CPMemory.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\Debugger.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\DriverDetails.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\Fifo.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\FPSCounter.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\FramebufferManagerBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\GeometryShaderGen.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\GeometryShaderManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\HiresTextures.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\ImageWrite.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\IndexGenerator.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\MainBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\OnScreenDisplay.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\OpcodeDecoding.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\PerfQueryBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\PixelEngine.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\PixelShaderGen.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\PixelShaderManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\PostProcessing.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\RenderBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\Statistics.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\TextureCacheBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\TextureConversionShader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\TextureDecoder_Common.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\TextureDecoder_Generic.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\TextureDecoder_x64.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoaderBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoaderManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoaderX64.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoader_Color.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoader_Normal.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoader_Position.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexLoader_TextCoord.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexManagerBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexShaderGen.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VertexShaderManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VideoBackendBase.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VideoConfig.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\VideoState.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\XFMemory.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\VideoCommon\XFStructs.cpp" />
     <ClCompile Include="..\..\Host.cpp" />
     <ClCompile Include="..\..\libretro.cpp" />
   </ItemGroup>
