@@ -16,6 +16,9 @@ public:
 	void* GetFuncAddress(const std::string& name) override;
 	bool Create(void *window_handle);
 	bool MakeCurrent() override;
-	bool ClearCurrent() override;
-	void Shutdown() override;
+	bool ClearCurrent();
+	void Shutdown();
+   void SetMode(u32 mode);
+   void Update();
+   bool PeekMessages();
 };

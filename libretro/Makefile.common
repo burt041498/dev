@@ -4,6 +4,7 @@ INCFLAGS := \
 	-I$(COREDIR)/VideoCommon \
 	-I$(CORECOMMONDIR) \
 	-I$(EXTDIR)/GL \
+	-I$(EXTDIR)/SOIL \
 	-I$(EXTDIR)/Bochs_disasm \
 	-I$(EXTDIR)/polarssl/include \
 	-I$(EXTDIR)/SFML/include \
@@ -258,7 +259,8 @@ SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/GLExtensions/GLExtensions.cpp \
 					$(COREDIR)/VideoBackends/OGL/TextureCache.cpp \
 					$(COREDIR)/VideoBackends/OGL/TextureConverter.cpp \
 					$(COREDIR)/VideoBackends/OGL/VertexManager.cpp \
-					$(COREDIR)/VideoBackends/OGL/GLInterface/GLInterface.cpp
+					$(COREDIR)/VideoBackends/OGL/GLInterface/GLInterface.cpp \
+					$(COREDIR)/VideoBackends/OGL/GLInterface/LibretroGL.cpp
 
 # Target video common
 SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \

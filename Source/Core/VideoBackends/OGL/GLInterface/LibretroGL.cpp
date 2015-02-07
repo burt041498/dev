@@ -46,3 +46,8 @@ void cInterfaceLibretroGL::Shutdown()
 {
 }
 
+void cInterfaceLibretroGL::SetMode(u32 mode) {  }
+
+void cInterfaceLibretroGL::Update() { }
+
+bool cInterfaceLibretroGL::PeekMessages() { return false; }
