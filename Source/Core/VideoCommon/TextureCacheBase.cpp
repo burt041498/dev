@@ -351,7 +351,7 @@ TextureCache::TCacheEntryBase* TextureCache::Load(const u32 stage)
 
 	// GPUs don't like when the specified mipmap count would require more than one 1x1-sized LOD in the mipmap chain
 	// e.g. 64x64 with 7 LODs would have the mipmap chain 64x64,32x32,16x16,8x8,4x4,2x2,1x1,0x0, so we limit the mipmap count to 6 there
-	tex_levels = (std::min)<u32>(IntLog2((std::max)(width, height)) + 1, tex_levels);
+	tex_levels = (std::min<u32>)(IntLog2((std::max)(width, height)) + 1, tex_levels);
 
 	TCacheEntryBase*& entry = textures[texID];
 	if (entry)
