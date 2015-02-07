@@ -157,7 +157,7 @@ SOURCES_C   += $(EXTDIR)/SOIL/image_DXT.c \
 					$(EXTDIR)/SOIL/stb_image_aug.c
 
 # Target audiocommon
-SOURCES_CXX += $(COREDIR)/AudioCommon/AudioCommon.cpp \
+SOURCES_CXX += $(COREDIR)/AudioCommon/AudioCommonLibretro.cpp \
 					$(COREDIR)/AudioCommon/DPL2Decoder.cpp \
 					$(COREDIR)/AudioCommon/Mixer.cpp \
 					$(COREDIR)/AudioCommon/WaveFile.cpp \
