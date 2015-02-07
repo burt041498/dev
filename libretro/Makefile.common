@@ -191,7 +191,7 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/SysConf.cpp \
 					$(CORECOMMONDIR)/Thread.cpp \
 					$(CORECOMMONDIR)/Timer.cpp \
-					$(CORECOMMONDIR)/Version.cpp \
+					$(CORECOMMONDIR)/VersionLibretro.cpp \
 					$(CORECOMMONDIR)/Crypto/bn.cpp \
 					$(CORECOMMONDIR)/Crypto/ec.cpp \
 					$(CORECOMMONDIR)/Logging/ConsoleListener.cpp \
