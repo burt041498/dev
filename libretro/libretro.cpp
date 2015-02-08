@@ -175,6 +175,13 @@ static void check_variables(void)
 #endif
 }
 
+static bool libretroMsgAlert(const char* caption, const char* text, bool yes_no,
+      int /*Style*/)
+{
+   if (log_cb)
+      log_cb(RETRO_LOG_INFO, "[%s] : %s\n", caption, text);
+   return yes_no;
+}
 
 bool retro_load_game(const struct retro_game_info *game)
 {
@@ -226,6 +233,8 @@ bool retro_load_game(const struct retro_game_info *game)
    }
 
    check_variables();
+
+   RegisterMsgAlertHandler(&libretroMsgAlert);
 
 	if (!BootManager::BootCore(game->path))
       return false;
