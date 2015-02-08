@@ -367,6 +367,11 @@ Renderer::Renderer()
 	g_ogl_config.gl_version = (const char*)glGetString(GL_VERSION);
 	g_ogl_config.glsl_version = (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION);
 
+   fprintf(stderr, "GL VENDOR: %s\n", g_ogl_config.gl_vendor);
+   fprintf(stderr, "GL RENDERER: %s\n", g_ogl_config.gl_renderer);
+   fprintf(stderr, "GL VERSION: %s\n", g_ogl_config.gl_version);
+   fprintf(stderr, "GLSL VERSION: %s\n", g_ogl_config.glsl_version);
+
 	InitDriverInfo();
 
 	// check for the max vertex attributes
