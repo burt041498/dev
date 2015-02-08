@@ -41,8 +41,8 @@ static void context_reset(void)
 // Call browser: Core.cpp:EmuThread() > main.cpp:Video_Initialize()
 bool cInterfaceLibretroGL::Create(void *window_handle)
 {
-#ifdef USING_GLES2
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES2;
+#ifdef USING_GLES3
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES3;
 #else
    hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
 #endif
