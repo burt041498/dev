@@ -249,7 +249,9 @@ bool retro_load_game(const struct retro_game_info *game)
 #ifdef USING_GLES3
    hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES3;
 #else
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL_CORE;
+   hw_render.version_major = 3;
+   hw_render.version_minor = 3;
 #endif
    hw_render.context_reset = context_reset;
    hw_render.bottom_left_origin = true;
