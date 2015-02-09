@@ -62,15 +62,6 @@
 #include "VideoCommon/OnScreenDisplay.h"
 #include "VideoCommon/VideoBackendBase.h"
 
-#ifdef __LIBRETRO__
-#include "libretro.h"
-
-extern retro_log_printf_t log_cb;
-retro_hw_get_proc_address_t libretro_get_proc_address;
-extern retro_environment_t environ_cb;
-struct retro_hw_render_callback hw_render;
-#endif
-
 // TODO: ugly, remove
 bool g_aspect_wide;
 
@@ -329,9 +320,9 @@ static void FifoPlayerThread()
 	return;
 }
 
-static void video_prepare()
+void VideoPrepare()
 {
-	const SCoreStartupParameter& core_parameter =
+	SCoreStartupParameter& core_parameter =
 		SConfig::GetInstance().m_LocalCoreStartupParameter;
 
 	// Determine the CPU thread function
@@ -439,33 +430,6 @@ static void video_prepare()
 		s_on_stopped_callback();
 }
 
-#ifdef __LIBRETRO__
-static void context_reset(void)
-{
-   if (log_cb)
-      log_cb(RETRO_LOG_INFO, "Context reset!\n");
-   video_prepare();
-}
-
-static bool create_hw_render_context(void)
-{
-#ifdef USING_GLES3
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES3;
-#else
-   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
-#endif
-   hw_render.context_reset = context_reset;
-   hw_render.bottom_left_origin = true;
-   hw_render.depth = true;
-   if (!environ_cb(RETRO_ENVIRONMENT_SET_HW_RENDER, &hw_render))
-      return false;
-
-   libretro_get_proc_address = hw_render.get_proc_address;
-
-   return true;
-}
-#endif
-
 // Initialize and create emulation thread
 // Call browser: Init():s_emu_thread().
 // See the BootManager.cpp file description for a complete call schedule.
@@ -556,11 +520,8 @@ void EmuThread()
 	Host_UpdateDisasmDialog();
 	Host_UpdateMainFrame();
 
-
-#ifdef __LIBRETRO__
-   create_hw_render_context();
-#else
-   video_prepare();
+#ifndef __LIBRETRO__
+   VideoPrepare();
 #endif
 }
 

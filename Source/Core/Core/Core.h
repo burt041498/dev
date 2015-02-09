@@ -67,6 +67,7 @@ void SetBlockStart(u32 addr);
 
 bool ShouldSkipFrame(int skipped);
 void VideoThrottle();
+void VideoPrepare();
 void RequestRefreshInfo();
 
 void UpdateTitle();

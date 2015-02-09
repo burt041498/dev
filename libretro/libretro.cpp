@@ -39,6 +39,11 @@
 
 extern Common::Event updateMainFrameEvent;
 
+extern retro_log_printf_t log_cb;
+retro_hw_get_proc_address_t libretro_get_proc_address;
+extern retro_environment_t environ_cb;
+struct retro_hw_render_callback hw_render;
+
 retro_log_printf_t log_cb;
 retro_video_refresh_t video_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
@@ -183,6 +188,13 @@ static bool libretroMsgAlert(const char* caption, const char* text, bool yes_no,
    return yes_no;
 }
 
+static void context_reset(void)
+{
+   if (log_cb)
+      log_cb(RETRO_LOG_INFO, "Context reset!\n");
+   Core::VideoPrepare();
+}
+
 bool retro_load_game(const struct retro_game_info *game)
 {
    const char *tmp = NULL;
@@ -233,6 +245,19 @@ bool retro_load_game(const struct retro_game_info *game)
    }
 
    check_variables();
+
+#ifdef USING_GLES3
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES3;
+#else
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
+#endif
+   hw_render.context_reset = context_reset;
+   hw_render.bottom_left_origin = true;
+   hw_render.depth = true;
+   if (!environ_cb(RETRO_ENVIRONMENT_SET_HW_RENDER, &hw_render))
+      return false;
+
+   libretro_get_proc_address = hw_render.get_proc_address;
 
    RegisterMsgAlertHandler(&libretroMsgAlert);
 
