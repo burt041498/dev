@@ -3,6 +3,7 @@
 // Refer to the license.txt file included.
 
 #include <cmath>
+#include <algorithm>
 
 #include "Common/Common.h"
 
