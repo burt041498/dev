@@ -630,9 +630,6 @@
     <ClCompile Include="..\..\..\Source\Core\Common\Timer.cpp">
       <Filter>Source Files\Core\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Core\Common\Version.cpp">
-      <Filter>Source Files\Core\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\Common\x64ABI.cpp">
       <Filter>Source Files\Core\Common</Filter>
     </ClCompile>
@@ -1305,9 +1302,6 @@
     <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceKeyboard.cpp">
       <Filter>Source Files\Core\Core\HW</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_GCAdapter.cpp">
-      <Filter>Source Files\Core\Core\HW</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\Core\HW\Sram.cpp">
       <Filter>Source Files\Core\Core\HW</Filter>
     </ClCompile>
@@ -1613,6 +1607,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\UICommon\UICommon.cpp">
       <Filter>Source Files\Core\Core\UICommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Common\VersionLibretro.cpp">
+      <Filter>Source Files\Core\Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

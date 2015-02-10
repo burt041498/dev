@@ -844,7 +844,7 @@
     <ClCompile Include="..\..\..\Source\Core\Common\SysConf.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Common\Thread.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Common\Timer.cpp" />
-    <ClCompile Include="..\..\..\Source\Core\Common\Version.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Common\VersionLibretro.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Common\x64ABI.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Common\x64Analyzer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Common\x64CPUDetect.cpp">
@@ -971,7 +971,6 @@
     <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceGCController.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceGCSteeringWheel.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_DeviceKeyboard.cpp" />
-    <ClCompile Include="..\..\..\Source\Core\Core\HW\SI_GCAdapter.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Core\HW\Sram.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Core\HW\StreamADPCM.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Core\HW\SystemTimers.cpp" />

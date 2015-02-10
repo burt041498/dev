@@ -17,12 +17,12 @@
 #include "Common/FileUtil.h"
 
 #ifdef _WIN32
+#include <windows.h>
 #include <commdlg.h>   // for GetSaveFileName
 #include <direct.h>    // getcwd
 #include <io.h>
 #include <shellapi.h>
 #include <shlobj.h>    // for SHGetFolderPath
-#include <windows.h>
 #else
 #include <dirent.h>
 #include <errno.h>
