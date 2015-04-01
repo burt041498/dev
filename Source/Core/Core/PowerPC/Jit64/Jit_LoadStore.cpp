@@ -108,6 +108,8 @@ void Jit64::lXXx(UGeckoInstruction inst)
 	// (mb2): I agree,
 	// IMHO those Idles should always be skipped and replaced by a more controllable "native" Idle methode
 	// ... maybe the throttle one already do that :p
+	// TODO: We shouldn't use a debug read here.  It should be possible to get
+	// the following instructions out of the JIT state.
 	if (SConfig::GetInstance().m_LocalCoreStartupParameter.bSkipIdle &&
 	    PowerPC::GetState() != PowerPC::CPU_STEPPING &&
 	    inst.OPCD == 32 &&
@@ -232,7 +234,7 @@ void Jit64::lXXx(UGeckoInstruction inst)
 				}
 				else if (gpr.R(a).IsSimpleReg() && gpr.R(b).IsSimpleReg())
 				{
-					LEA(32, RSCRATCH2, MComplex(gpr.RX(a), gpr.RX(b), SCALE_1, 0));
+					LEA(32, RSCRATCH2, MRegSum(gpr.RX(a), gpr.RX(b)));
 				}
 				else
 				{
@@ -335,7 +337,7 @@ void Jit64::dcbz(UGeckoInstruction inst)
 	MOV(32, M(&PC), Imm32(jit->js.compilerPC));
 	BitSet32 registersInUse = CallerSavedRegistersInUse();
 	ABI_PushRegistersAndAdjustStack(registersInUse, 0);
-	ABI_CallFunctionR((void *)&Memory::ClearCacheLine, RSCRATCH);
+	ABI_CallFunctionR((void *)&PowerPC::ClearCacheLine, RSCRATCH);
 	ABI_PopRegistersAndAdjustStack(registersInUse, 0);
 	FixupBranch exit = J(true);
 
@@ -449,7 +451,7 @@ void Jit64::stXx(UGeckoInstruction inst)
 
 	if (gpr.R(a).IsSimpleReg() && gpr.R(b).IsSimpleReg())
 	{
-		LEA(32, RSCRATCH2, MComplex(gpr.RX(a), gpr.RX(b), SCALE_1, 0));
+		LEA(32, RSCRATCH2, MRegSum(gpr.RX(a), gpr.RX(b)));
 	}
 	else
 	{
@@ -525,7 +527,7 @@ void Jit64::lmw(UGeckoInstruction inst)
 		ADD(32, R(RSCRATCH2), gpr.R(inst.RA));
 	for (int i = inst.RD; i < 32; i++)
 	{
-		SafeLoadToReg(RSCRATCH, R(RSCRATCH2), 32, (i - inst.RD) * 4, CallerSavedRegistersInUse() | BitSet32 { RSCRATCH_EXTRA }, false);
+		SafeLoadToReg(RSCRATCH, R(RSCRATCH2), 32, (i - inst.RD) * 4, CallerSavedRegistersInUse() | BitSet32 { RSCRATCH2 }, false);
 		gpr.BindToRegister(i, false, true);
 		MOV(32, gpr.R(i), R(RSCRATCH));
 	}

@@ -44,7 +44,7 @@ private:
 class CWatchView : public wxGrid
 {
 public:
-	CWatchView(wxWindow* parent, wxWindowID id);
+	CWatchView(wxWindow* parent, wxWindowID id = wxID_ANY);
 	void Update() override;
 	void OnMouseDownR(wxGridEvent& event);
 	void OnPopupMenu(wxCommandEvent& event);
@@ -52,4 +52,5 @@ public:
 private:
 	u32 m_selectedAddress = 0;
 	u32 m_selectedRow = 0;
+	CWatchTable* m_watch_table;
 };

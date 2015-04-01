@@ -51,6 +51,7 @@
 #include "Core/State.h"
 #include "Core/HW/CPU.h"
 #include "Core/HW/DVDInterface.h"
+#include "Core/HW/GCKeyboard.h"
 #include "Core/HW/GCPad.h"
 #include "Core/HW/ProcessorInterface.h"
 #include "Core/HW/SI_Device.h"
@@ -64,7 +65,6 @@
 #include "DiscIO/NANDContentLoader.h"
 
 #include "DolphinWX/AboutDolphin.h"
-#include "DolphinWX/ConfigMain.h"
 #include "DolphinWX/ControllerConfigDiag.h"
 #include "DolphinWX/FifoPlayerDlg.h"
 #include "DolphinWX/Frame.h"
@@ -80,6 +80,7 @@
 #include "DolphinWX/WXInputBase.h"
 #include "DolphinWX/WxUtils.h"
 #include "DolphinWX/Cheats/CheatsWindow.h"
+#include "DolphinWX/Config/ConfigMain.h"
 #include "DolphinWX/Debugger/BreakpointWindow.h"
 #include "DolphinWX/Debugger/CodeWindow.h"
 #include "DolphinWX/Debugger/WatchWindow.h"
@@ -139,7 +140,7 @@ wxMenuBar* CFrame::CreateMenu()
 	fileMenu->Append(IDM_CHANGE_DISC, GetMenuLabel(HK_CHANGE_DISC));
 
 	wxMenu *externalDrive = new wxMenu;
-	fileMenu->Append(IDM_DRIVES, _("&Boot from DVD Drive..."), externalDrive);
+	fileMenu->Append(IDM_DRIVES, _("&Boot from DVD Backup..."), externalDrive);
 
 	drives = cdio_get_devices();
 	// Windows Limitation of 24 character drives
@@ -189,7 +190,7 @@ wxMenuBar* CFrame::CreateMenu()
 	loadMenu->Append(IDM_UNDO_SAVE_STATE, GetMenuLabel(HK_UNDO_SAVE_STATE));
 	saveMenu->AppendSeparator();
 
-	loadMenu->Append(IDM_LOAD_STATE_FILE,  GetMenuLabel(HK_LOAD_STATE_FILE));
+	loadMenu->Append(IDM_LOAD_STATE_FILE, GetMenuLabel(HK_LOAD_STATE_FILE));
 	loadMenu->Append(IDM_LOAD_SELECTED_SLOT, GetMenuLabel(HK_LOAD_STATE_SLOT_SELECTED));
 	loadMenu->Append(IDM_UNDO_LOAD_STATE, GetMenuLabel(HK_UNDO_LOAD_STATE));
 	loadMenu->AppendSeparator();
@@ -198,7 +199,7 @@ wxMenuBar* CFrame::CreateMenu()
 	{
 		loadMenu->Append(IDM_LOAD_SLOT_1 + i - 1, GetMenuLabel(HK_LOAD_STATE_SLOT_1 + i - 1));
 		saveMenu->Append(IDM_SAVE_SLOT_1 + i - 1, GetMenuLabel(HK_SAVE_STATE_SLOT_1 + i - 1));
-		slotSelectMenu->Append(IDM_SELECT_SLOT_1 + i - 1, GetMenuLabel(HK_SELECT_STATE_SLOT_1 + i -1));
+		slotSelectMenu->Append(IDM_SELECT_SLOT_1 + i - 1, GetMenuLabel(HK_SELECT_STATE_SLOT_1 + i - 1));
 	}
 
 	loadMenu->AppendSeparator();
@@ -238,8 +239,8 @@ wxMenuBar* CFrame::CreateMenu()
 	pOptionsMenu->Append(IDM_CONFIG_GFX_BACKEND, _("&Graphics Settings"));
 	pOptionsMenu->Append(IDM_CONFIG_AUDIO, _("&Audio Settings"));
 	pOptionsMenu->Append(IDM_CONFIG_CONTROLLERS, _("&Controller Settings"));
+	pOptionsMenu->Append(IDM_CONFIG_MENU_COMMANDS, _("&Key Shortcuts"));
 	pOptionsMenu->Append(IDM_CONFIG_HOTKEYS, _("&Hotkey Settings"));
-	pOptionsMenu->Append(IDM_CONFIG_MENU_COMMANDS, _("&Menu Accelerators"));
 	if (g_pCodeWindow)
 	{
 		pOptionsMenu->AppendSeparator();
@@ -252,7 +253,7 @@ wxMenuBar* CFrame::CreateMenu()
 	toolsMenu->Append(IDM_MEMCARD, _("&Memcard Manager (GC)"));
 	toolsMenu->Append(IDM_IMPORT_SAVE, _("Import Wii Save"));
 	toolsMenu->Append(IDM_EXPORT_ALL_SAVE, _("Export All Wii Saves"));
-	toolsMenu->Append(IDM_CHEATS, _("&Cheats Manager"));
+	toolsMenu->Append(IDM_CHEATS, _("&Cheat Manager"));
 
 	toolsMenu->Append(IDM_NETPLAY, _("Start &NetPlay"));
 
@@ -335,8 +336,8 @@ wxMenuBar* CFrame::CreateMenu()
 	regionMenu->Check(IDM_LIST_FRANCE, SConfig::GetInstance().m_ListFrance);
 	regionMenu->AppendCheckItem(IDM_LIST_GERMANY, _("Show Germany"));
 	regionMenu->Check(IDM_LIST_GERMANY, SConfig::GetInstance().m_ListGermany);
-	regionMenu->AppendCheckItem(IDM_LIST_INTERNATIONAL, _("Show International"));
-	regionMenu->Check(IDM_LIST_INTERNATIONAL, SConfig::GetInstance().m_ListInternational);
+	regionMenu->AppendCheckItem(IDM_LIST_WORLD, _("Show World"));
+	regionMenu->Check(IDM_LIST_WORLD, SConfig::GetInstance().m_ListWorld);
 	regionMenu->AppendCheckItem(IDM_LIST_ITALY, _("Show Italy"));
 	regionMenu->Check(IDM_LIST_ITALY, SConfig::GetInstance().m_ListItaly);
 	regionMenu->AppendCheckItem(IDM_LIST_KOREA, _("Show Korea"));
@@ -686,7 +687,8 @@ void CFrame::BootGame(const std::string& filename)
 // Open file to boot
 void CFrame::OnOpen(wxCommandEvent& WXUNUSED (event))
 {
-	DoOpen(true);
+	if (Core::GetState() == Core::CORE_UNINITIALIZED)
+		DoOpen(true);
 }
 
 void CFrame::DoOpen(bool Boot)
@@ -939,12 +941,12 @@ void CFrame::ToggleDisplayMode(bool bFullscreen)
 	if (bFullscreen && SConfig::GetInstance().m_LocalCoreStartupParameter.strFullscreenResolution != "Auto")
 	{
 		DEVMODE dmScreenSettings;
-		memset(&dmScreenSettings,0,sizeof(dmScreenSettings));
+		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
 		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
 		sscanf(SConfig::GetInstance().m_LocalCoreStartupParameter.strFullscreenResolution.c_str(),
 				"%dx%d", &dmScreenSettings.dmPelsWidth, &dmScreenSettings.dmPelsHeight);
 		dmScreenSettings.dmBitsPerPel = 32;
-		dmScreenSettings.dmFields = DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
+		dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
 
 		// Try To Set Selected Mode And Get Results.  NOTE: CDS_FULLSCREEN Gets Rid Of Start Bar.
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
@@ -1071,13 +1073,15 @@ void CFrame::StartGame(const std::string& filename)
 
 		m_RenderParent->SetFocus();
 
-		wxTheApp->Bind(wxEVT_KEY_DOWN,    &CFrame::OnKeyDown, this);
-		wxTheApp->Bind(wxEVT_KEY_UP,      &CFrame::OnKeyUp,   this);
-		wxTheApp->Bind(wxEVT_RIGHT_DOWN,  &CFrame::OnMouse,   this);
-		wxTheApp->Bind(wxEVT_RIGHT_UP,    &CFrame::OnMouse,   this);
-		wxTheApp->Bind(wxEVT_MIDDLE_DOWN, &CFrame::OnMouse,   this);
-		wxTheApp->Bind(wxEVT_MIDDLE_UP,   &CFrame::OnMouse,   this);
-		wxTheApp->Bind(wxEVT_MOTION,      &CFrame::OnMouse,   this);
+		wxTheApp->Bind(wxEVT_KEY_DOWN,     &CFrame::OnKeyDown,     this);
+		wxTheApp->Bind(wxEVT_KEY_UP,       &CFrame::OnKeyUp,       this);
+		wxTheApp->Bind(wxEVT_RIGHT_DOWN,   &CFrame::OnMouse,       this);
+		wxTheApp->Bind(wxEVT_RIGHT_UP,     &CFrame::OnMouse,       this);
+		wxTheApp->Bind(wxEVT_MIDDLE_DOWN,  &CFrame::OnMouse,       this);
+		wxTheApp->Bind(wxEVT_MIDDLE_UP,    &CFrame::OnMouse,       this);
+		wxTheApp->Bind(wxEVT_MOTION,       &CFrame::OnMouse,       this);
+		wxTheApp->Bind(wxEVT_SET_FOCUS,    &CFrame::OnFocusChange, this);
+		wxTheApp->Bind(wxEVT_KILL_FOCUS,   &CFrame::OnFocusChange, this);
 		m_RenderParent->Bind(wxEVT_SIZE, &CFrame::OnRenderParentResize, this);
 	}
 
@@ -1211,7 +1215,6 @@ void CFrame::DoStop()
 			Movie::EndPlayInput(false);
 		NetPlay::StopGame();
 
-		wxBeginBusyCursor();
 		BootManager::Stop();
 		UpdateGUI();
 	}
@@ -1219,8 +1222,6 @@ void CFrame::DoStop()
 
 void CFrame::OnStopped()
 {
-	wxEndBusyCursor();
-
 	m_confirmStop = false;
 
 #if defined(HAVE_X11) && HAVE_X11
@@ -1349,14 +1350,12 @@ void CFrame::OnConfigControllers(wxCommandEvent& WXUNUSED (event))
 {
 	ControllerConfigDiag config_dlg(this);
 	config_dlg.ShowModal();
-	config_dlg.Destroy();
 }
 
 void CFrame::OnConfigMenuCommands(wxCommandEvent& WXUNUSED(event))
 {
-	HotkeyConfigDialog *m_HotkeyDialog = new HotkeyConfigDialog(this);
-	m_HotkeyDialog->ShowModal();
-	m_HotkeyDialog->Destroy();
+	HotkeyConfigDialog m_HotkeyDialog(this);
+	m_HotkeyDialog.ShowModal();
 
 	// Update the GUI in case menu accelerators were changed
 	UpdateGUI();
@@ -1365,33 +1364,33 @@ void CFrame::OnConfigMenuCommands(wxCommandEvent& WXUNUSED(event))
 
 void CFrame::OnConfigHotkey(wxCommandEvent& WXUNUSED (event))
 {
-	bool was_init = false;
-
 	InputConfig* const hotkey_plugin = HotkeyManagerEmu::GetConfig();
 
 	// check if game is running
-	if (g_controller_interface.IsInit())
+	bool game_running = false;
+	if (Core::GetState() == Core::CORE_RUN)
 	{
-		was_init = true;
-	}
-	else
-	{
-#if defined(HAVE_X11) && HAVE_X11
-		Window win = X11Utils::XWindowFromHandle(GetHandle());
-		HotkeyManagerEmu::Initialize(reinterpret_cast<void*>(win));
-#else
-		HotkeyManagerEmu::Initialize(reinterpret_cast<void*>(GetHandle()));
-#endif
+		Core::SetState(Core::CORE_PAUSE);
+		game_running = true;
 	}
 
-	InputConfigDialog m_ConfigFrame(this, *hotkey_plugin, _("Dolphin Hotkeys"), 0);
+	HotkeyManagerEmu::Enable(false);
+
+	InputConfigDialog m_ConfigFrame(this, *hotkey_plugin, _("Dolphin Hotkeys"));
 	m_ConfigFrame.ShowModal();
-	m_ConfigFrame.Destroy();
+
+	// Update references in case controllers were refreshed
+	Wiimote::LoadConfig();
+	Keyboard::LoadConfig();
+	Pad::LoadConfig();
+	HotkeyManagerEmu::LoadConfig();
+
+	HotkeyManagerEmu::Enable(true);
 
 	// if game isn't running
-	if (!was_init)
+	if (game_running)
 	{
-		HotkeyManagerEmu::Shutdown();
+		Core::SetState(Core::CORE_RUN);
 	}
 
 	// Update the GUI in case menu accelerators were changed
@@ -1415,7 +1414,7 @@ void CFrame::OnHelp(wxCommandEvent& event)
 		WxUtils::Launch("https://dolphin-emu.org/docs/guides/");
 		break;
 	case IDM_HELP_GITHUB:
-		WxUtils::Launch("https://github.com/dolphin-emu/dolphin/");
+		WxUtils::Launch("https://github.com/dolphin-emu/dolphin");
 		break;
 	}
 }
@@ -1430,7 +1429,7 @@ void CFrame::ClearStatusBar()
 
 void CFrame::StatusBarMessage(const char * Text, ...)
 {
-	const int MAX_BYTES = 1024*10;
+	const int MAX_BYTES = 1024 * 10;
 	char Str[MAX_BYTES];
 	va_list ArgPtr;
 	va_start(ArgPtr, Text);
@@ -1439,7 +1438,7 @@ void CFrame::StatusBarMessage(const char * Text, ...)
 
 	if (this->GetStatusBar()->IsEnabled())
 	{
-		this->GetStatusBar()->SetStatusText(StrToWxStr(Str),0);
+		this->GetStatusBar()->SetStatusText(StrToWxStr(Str), 0);
 	}
 }
 
@@ -1487,7 +1486,7 @@ void CFrame::OnImportSave(wxCommandEvent& WXUNUSED (event))
 	}
 }
 
-void CFrame::OnShow_CheatsWindow(wxCommandEvent& WXUNUSED (event))
+void CFrame::OnShowCheatsWindow(wxCommandEvent& WXUNUSED (event))
 {
 	if (!g_CheatsWindow)
 		g_CheatsWindow = new wxCheatsWindow(this);
@@ -1767,7 +1766,7 @@ void CFrame::UpdateGUI()
 	GetMenuBar()->FindItem(IDM_SCREENSHOT)->Enable(Running || Paused);
 	GetMenuBar()->FindItem(IDM_TOGGLE_FULLSCREEN)->Enable(Running || Paused);
 
-	// Update Menu Accelerators
+	// Update Key Shortcuts
 	for (unsigned int i = 0; i < NUM_HOTKEYS; i++)
 	{
 		if (GetCmdForHotkey(i) == -1)
@@ -1945,8 +1944,8 @@ void CFrame::GameListChanged(wxCommandEvent& event)
 	case IDM_LIST_GERMANY:
 		SConfig::GetInstance().m_ListGermany = event.IsChecked();
 		break;
-	case IDM_LIST_INTERNATIONAL:
-		SConfig::GetInstance().m_ListInternational = event.IsChecked();
+	case IDM_LIST_WORLD:
+		SConfig::GetInstance().m_ListWorld = event.IsChecked();
 		break;
 	case IDM_LIST_ITALY:
 		SConfig::GetInstance().m_ListItaly = event.IsChecked();

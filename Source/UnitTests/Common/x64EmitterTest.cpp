@@ -2,8 +2,8 @@
 // Licensed under GPLv2
 // Refer to the license.txt file included.
 
-#include <cstring>
 #include <cctype>
+#include <cstring>
 #include <disasm.h>  // From Bochs, fallback included in Externals.
 #include <map>
 #include <memory>
@@ -810,6 +810,7 @@ TWO_OP_SSE_TEST(PACKUSWB, "dqword")
 TWO_OP_SSE_TEST(PUNPCKLBW, "dqword")
 TWO_OP_SSE_TEST(PUNPCKLWD, "dqword")
 TWO_OP_SSE_TEST(PUNPCKLDQ, "dqword")
+TWO_OP_SSE_TEST(PUNPCKLQDQ, "dqword")
 
 TWO_OP_SSE_TEST(PTEST, "dqword")
 TWO_OP_SSE_TEST(PAND, "dqword")

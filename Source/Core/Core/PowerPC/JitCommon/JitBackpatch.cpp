@@ -30,8 +30,11 @@ static void BackPatchError(const std::string &text, u8 *codePtr, u32 emAddress)
 bool Jitx86Base::HandleFault(uintptr_t access_address, SContext* ctx)
 {
 	// TODO: do we properly handle off-the-end?
-	if (access_address >= (uintptr_t)Memory::base && access_address < (uintptr_t)Memory::base + 0x100010000)
-		return BackPatch((u32)(access_address - (uintptr_t)Memory::base), ctx);
+	if (access_address >= (uintptr_t)Memory::physical_base && access_address < (uintptr_t)Memory::physical_base + 0x100010000)
+		return BackPatch((u32)(access_address - (uintptr_t)Memory::physical_base), ctx);
+	if (access_address >= (uintptr_t)Memory::logical_base && access_address < (uintptr_t)Memory::logical_base + 0x100010000)
+		return BackPatch((u32)(access_address - (uintptr_t)Memory::logical_base), ctx);
+
 
 	return false;
 }
@@ -73,7 +76,7 @@ bool Jitx86Base::BackPatch(u32 emAddress, SContext* ctx)
 
 	BitSet32 registersInUse = it->second;
 
-	u8* exceptionHandler = NULL;
+	u8* exceptionHandler = nullptr;
 	if (jit->js.memcheck)
 	{
 		auto it2 = exceptionHandlerAtLoc.find(codePtr);
@@ -106,7 +109,7 @@ bool Jitx86Base::BackPatch(u32 emAddress, SContext* ctx)
 			if (codePtr[totalSize] != 0xc1 || codePtr[totalSize + 2] != 0x10)
 			{
 				PanicAlert("BackPatch: didn't find expected shift %p", codePtr);
-				return nullptr;
+				return false;
 			}
 			info.signExtend = (codePtr[totalSize + 1] & 0x10) != 0;
 			totalSize += 3;
@@ -165,7 +168,7 @@ bool Jitx86Base::BackPatch(u32 emAddress, SContext* ctx)
 		if (it3 == pcAtLoc.end())
 		{
 			PanicAlert("BackPatch: no pc entry for address %p", codePtr);
-			return nullptr;
+			return false;
 		}
 
 		u32 pc = it3->second;

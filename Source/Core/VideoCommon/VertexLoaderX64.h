@@ -8,8 +8,8 @@ public:
 
 protected:
 	std::string GetName() const override { return "VertexLoaderX64"; }
-	bool IsInitialized() override;
-	int RunVertices(int primitive, int count, DataReader src, DataReader dst) override;
+	bool IsInitialized() override { return true; }
+	int RunVertices(DataReader src, DataReader dst, int count, int primitive) override;
 
 private:
 	u32 m_src_ofs = 0;

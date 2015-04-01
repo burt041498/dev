@@ -61,7 +61,6 @@
 
 #ifdef _WIN32
 #include <shellapi.h>
-#include "Common/ExtendedTrace.h"
 
 #ifndef SM_XVIRTUALSCREEN
 #define SM_XVIRTUALSCREEN 76
@@ -94,32 +93,6 @@ std::string wxStringTranslator(const char *);
 
 CFrame* main_frame = nullptr;
 
-#ifdef WIN32
-//Has no error handling.
-//I think that if an error occurs here there's no way to handle it anyway.
-LONG WINAPI MyUnhandledExceptionFilter(LPEXCEPTION_POINTERS e)
-{
-	//EnterCriticalSection(&g_uefcs);
-
-	File::IOFile file("exceptioninfo.txt", "a");
-	file.Seek(0, SEEK_END);
-	etfprint(file.GetHandle(), "\n");
-	//etfprint(file, g_buildtime);
-	//etfprint(file, "\n");
-	//dumpCurrentDate(file);
-	etfprintf(file.GetHandle(), "Unhandled Exception\n  Code: 0x%08X\n",
-		e->ExceptionRecord->ExceptionCode);
-
-	STACKTRACE2(file.GetHandle(), e->ContextRecord->Rip, e->ContextRecord->Rsp, e->ContextRecord->Rbp);
-
-	file.Close();
-	_flushall();
-
-	//LeaveCriticalSection(&g_uefcs);
-	return EXCEPTION_CONTINUE_SEARCH;
-}
-#endif
-
 bool DolphinApp::Initialize(int& c, wxChar **v)
 {
 #if defined HAVE_X11 && HAVE_X11
@@ -134,8 +107,6 @@ bool DolphinApp::OnInit()
 {
 	Bind(wxEVT_QUERY_END_SESSION, &DolphinApp::OnEndSession, this);
 	Bind(wxEVT_END_SESSION, &DolphinApp::OnEndSession, this);
-
-	InitLanguageSupport();
 
 	// Declarations and definitions
 	bool UseDebugger = false;
@@ -209,6 +180,7 @@ bool DolphinApp::OnInit()
 
 	// Gets the command line parameters
 	wxCmdLineParser parser(cmdLineDesc, argc, argv);
+	LoadFile = false;
 	if (argc == 2 && File::Exists(argv[1].ToUTF8().data()))
 	{
 		LoadFile = true;
@@ -228,27 +200,20 @@ bool DolphinApp::OnInit()
 	selectAudioEmulation = parser.Found("audio_emulation", &audioEmulationName);
 	selectPerfDir = parser.Found("perf_dir", &perfDir);
 	playMovie = parser.Found("movie", &movieFile);
-
-	if (parser.Found("user", &userPath))
-	{
-		File::CreateFullPath(WxStrToStr(userPath) + DIR_SEP);
-		File::GetUserPath(D_USER_IDX, userPath.ToStdString() + DIR_SEP);
-	}
+	parser.Found("user", &userPath);
 #endif // wxUSE_CMDLINE_PARSER
 
 	// Register message box and translation handlers
 	RegisterMsgAlertHandler(&wxMsgAlert);
 	RegisterStringTranslator(&wxStringTranslator);
 
-	// "ExtendedTrace" looks freakin' dangerous!!!
-#ifdef _WIN32
-	EXTENDEDTRACEINITIALIZE(".");
-	SetUnhandledExceptionFilter(&MyUnhandledExceptionFilter);
-#elif wxUSE_ON_FATAL_EXCEPTION
+#if wxUSE_ON_FATAL_EXCEPTION
 	wxHandleFatalExceptions(true);
 #endif
 
+	UICommon::SetUserDirectory(userPath.ToStdString());
 	UICommon::CreateDirectories();
+	InitLanguageSupport();	// The language setting is loaded from the user directory
 	UICommon::Init();
 
 	if (selectPerfDir)
@@ -419,7 +384,6 @@ void DolphinApp::OnFatalException()
 {
 	WiimoteReal::Shutdown();
 }
-
 
 // ------------
 // Talk to GUI

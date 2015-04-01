@@ -8,6 +8,7 @@
 #include "Common/IniFile.h"
 #include "Core/ConfigManager.h"
 #include "Core/HW/SI.h"
+#include "Core/PowerPC/PowerPC.h"
 #include "DiscIO/NANDContentLoader.h"
 
 SConfig* SConfig::m_Instance;
@@ -241,6 +242,7 @@ void SConfig::SaveInterfaceSettings(IniFile& ini)
 	interface->Set("ShowLogConfigWindow", m_InterfaceLogConfigWindow);
 	interface->Set("ExtendedFPSInfo", m_InterfaceExtendedFPSInfo);
 	interface->Set("ThemeName40", m_LocalCoreStartupParameter.theme_name);
+	interface->Set("PauseOnFocusLost", m_PauseOnFocusLost);
 }
 
 void SConfig::SaveHotkeySettings(IniFile& ini)
@@ -287,7 +289,7 @@ void SConfig::SaveGameListSettings(IniFile& ini)
 	gamelist->Set("ListAustralia", m_ListAustralia);
 	gamelist->Set("ListFrance", m_ListFrance);
 	gamelist->Set("ListGermany", m_ListGermany);
-	gamelist->Set("ListInternational", m_ListInternational);
+	gamelist->Set("ListWorld", m_ListWorld);
 	gamelist->Set("ListItaly", m_ListItaly);
 	gamelist->Set("ListKorea", m_ListKorea);
 	gamelist->Set("ListNetherlands", m_ListNetherlands);
@@ -352,7 +354,6 @@ void SConfig::SaveCoreSettings(IniFile& ini)
 	core->Set("GFXBackend", m_LocalCoreStartupParameter.m_strVideoBackend);
 	core->Set("GPUDeterminismMode", m_LocalCoreStartupParameter.m_strGPUDeterminismMode);
 	core->Set("GameCubeAdapter", m_GameCubeAdapter);
-	core->Set("GameCubeAdapterThread", m_GameCubeAdapterThread);
 }
 
 void SConfig::SaveMovieSettings(IniFile& ini)
@@ -362,6 +363,7 @@ void SConfig::SaveMovieSettings(IniFile& ini)
 	movie->Set("PauseMovie", m_PauseMovie);
 	movie->Set("Author", m_strMovieAuthor);
 	movie->Set("DumpFrames", m_DumpFrames);
+	movie->Set("DumpFramesSilent", m_DumpFramesSilent);
 	movie->Set("ShowInputDisplay", m_ShowInputDisplay);
 }
 
@@ -433,11 +435,36 @@ void SConfig::LoadGeneralSettings(IniFile& ini)
 			m_ISOFolder.push_back(std::move(tmpPath));
 		}
 	}
+	// Check for old file path (Changed in 4.0-4003)
+	// This can probably be removed after 5.0 stable is launched
+	else if (general->Get("GCMPathes", &numISOPaths, 0))
+	{
+		for (int i = 0; i < numISOPaths; i++)
+		{
+			std::string tmpPath;
+			general->Get(StringFromFormat("GCMPath%i", i), &tmpPath, "");
+			bool found = false;
+			for (int j = 0; j < m_ISOFolder.size(); ++j)
+			{
+				if (m_ISOFolder[j] == tmpPath)
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+				m_ISOFolder.push_back(std::move(tmpPath));
+		}
+	}
 
-	general->Get("RecursiveISOPaths", &m_RecursiveISOFolder, false);
+	if (!general->Get("RecursiveISOPaths", &m_RecursiveISOFolder, false))
+	{
+		// Check for old name
+		general->Get("RecursiveGCMPaths", &m_RecursiveISOFolder, false);
+	}
 
 	general->Get("NANDRootPath", &m_NANDPath);
-	m_NANDPath = File::GetUserPath(D_WIIROOT_IDX, m_NANDPath);
+	File::SetUserPath(D_WIIROOT_IDX, m_NANDPath);
 	DiscIO::cUIDsys::AccessInstance().UpdateLocation();
 	DiscIO::CSharedContent::AccessInstance().UpdateLocation();
 	general->Get("WirelessMac", &m_WirelessMac);
@@ -463,6 +490,7 @@ void SConfig::LoadInterfaceSettings(IniFile& ini)
 	interface->Get("ShowLogConfigWindow",     &m_InterfaceLogConfigWindow,                    false);
 	interface->Get("ExtendedFPSInfo",         &m_InterfaceExtendedFPSInfo,                    false);
 	interface->Get("ThemeName40",             &m_LocalCoreStartupParameter.theme_name,        "Clean");
+	interface->Get("PauseOnFocusLost",        &m_PauseOnFocusLost,                            false);
 }
 
 void SConfig::LoadHotkeySettings(IniFile& ini)
@@ -511,7 +539,7 @@ void SConfig::LoadGameListSettings(IniFile& ini)
 	gamelist->Get("ListAustralia",     &m_ListAustralia,     true);
 	gamelist->Get("ListFrance",        &m_ListFrance,        true);
 	gamelist->Get("ListGermany",       &m_ListGermany,       true);
-	gamelist->Get("ListInternational", &m_ListInternational, true);
+	gamelist->Get("ListWorld",         &m_ListWorld,         true);
 	gamelist->Get("ListItaly",         &m_ListItaly,         true);
 	gamelist->Get("ListKorea",         &m_ListKorea,         true);
 	gamelist->Get("ListNetherlands",   &m_ListNetherlands,   true);
@@ -541,13 +569,13 @@ void SConfig::LoadCoreSettings(IniFile& ini)
 
 	core->Get("HLE_BS2",      &m_LocalCoreStartupParameter.bHLE_BS2, false);
 #ifdef _M_X86
-	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, SCoreStartupParameter::CORE_JIT64);
+	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, PowerPC::CORE_JIT64);
 #elif _M_ARM_32
-	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, SCoreStartupParameter::CORE_JITARM);
+	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, PowerPC::CORE_JITARM);
 #elif _M_ARM_64
-	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, SCoreStartupParameter::CORE_JITARM64);
+	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, PowerPC::CORE_JITARM64);
 #else
-	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, SCoreStartupParameter::CORE_INTERPRETER);
+	core->Get("CPUCore",      &m_LocalCoreStartupParameter.iCPUCore, PowerPC::CORE_INTERPRETER);
 #endif
 	core->Get("Fastmem",           &m_LocalCoreStartupParameter.bFastmem,      true);
 	core->Get("DSPHLE",            &m_LocalCoreStartupParameter.bDSPHLE,       true);
@@ -593,7 +621,6 @@ void SConfig::LoadCoreSettings(IniFile& ini)
 	core->Get("GFXBackend",                &m_LocalCoreStartupParameter.m_strVideoBackend, "");
 	core->Get("GPUDeterminismMode",        &m_LocalCoreStartupParameter.m_strGPUDeterminismMode, "auto");
 	core->Get("GameCubeAdapter",           &m_GameCubeAdapter,                             true);
-	core->Get("GameCubeAdapterThread",     &m_GameCubeAdapterThread,                       true);
 }
 
 void SConfig::LoadMovieSettings(IniFile& ini)
@@ -603,6 +630,7 @@ void SConfig::LoadMovieSettings(IniFile& ini)
 	movie->Get("PauseMovie", &m_PauseMovie, false);
 	movie->Get("Author", &m_strMovieAuthor, "");
 	movie->Get("DumpFrames", &m_DumpFrames, false);
+	movie->Get("DumpFramesSilent", &m_DumpFramesSilent, false);
 	movie->Get("ShowInputDisplay", &m_ShowInputDisplay, false);
 }
 
