@@ -470,6 +470,7 @@ Renderer::Renderer()
 	g_Config.backend_info.bSupportsBBox = GLExtensions::Supports("GL_ARB_shader_storage_buffer_object");
 	g_Config.backend_info.bSupportsGSInstancing = GLExtensions::Supports("GL_ARB_gpu_shader5");
 	g_Config.backend_info.bSupportsGeometryShaders = GLExtensions::Version() >= 320;
+	g_Config.backend_info.bSupportsPaletteConversion = GLExtensions::Supports("GL_ARB_texture_buffer_object");
 
 	// Desktop OpenGL supports the binding layout if it supports 420pack
 	// OpenGL ES 3.1 supports it implicitly without an extension
@@ -504,6 +505,7 @@ Renderer::Renderer()
 			g_Config.backend_info.bSupportsBindingLayout = true;
 			g_Config.backend_info.bSupportsEarlyZ = true;
 			g_Config.backend_info.bSupportsGeometryShaders = g_ogl_config.bSupportsAEP;
+			//g_Config.backend_info.bSupportsPaletteConversion = GLExtensions::Supports("GL_EXT_texture_buffer");
 		}
 	}
 	else
@@ -1871,13 +1873,13 @@ void Renderer::SetDitherMode()
 		glDisable(GL_DITHER);
 }
 
-void Renderer::SetSamplerState(int stage, int texindex)
+void Renderer::SetSamplerState(int stage, int texindex, bool custom_tex)
 {
 	auto const& tex = bpmem.tex[texindex];
 	auto const& tm0 = tex.texMode0[stage];
 	auto const& tm1 = tex.texMode1[stage];
 
-	g_sampler_cache->SetSamplerState((texindex * 4) + stage, tm0, tm1);
+	g_sampler_cache->SetSamplerState((texindex * 4) + stage, tm0, tm1, custom_tex);
 }
 
 void Renderer::SetInterlacingMode()

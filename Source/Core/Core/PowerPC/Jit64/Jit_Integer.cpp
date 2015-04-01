@@ -1273,7 +1273,7 @@ void Jit64::addx(UGeckoInstruction inst)
 	{
 		gpr.Lock(a, b, d);
 		gpr.BindToRegister(d, false);
-		LEA(32, gpr.RX(d), MComplex(gpr.RX(a), gpr.RX(b), 1, 0));
+		LEA(32, gpr.RX(d), MRegSum(gpr.RX(a), gpr.RX(b)));
 		needs_test = true;
 	}
 	else
@@ -1525,7 +1525,7 @@ void Jit64::rlwimix(UGeckoInstruction inst)
 			bool isRightShift = mask == (1U << inst.SH) - 1;
 			if (gpr.R(a).IsImm())
 			{
-				u32 maskA = gpr.R(a).offset & ~mask;
+				u32 maskA = (u32)gpr.R(a).offset & ~mask;
 				gpr.BindToRegister(a, false, true);
 				MOV(32, gpr.R(a), gpr.R(s));
 				if (isLeftShift)

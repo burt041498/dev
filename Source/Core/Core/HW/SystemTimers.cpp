@@ -157,7 +157,7 @@ static void CPCallback(u64 userdata, int cyclesLate)
 static void DecrementerCallback(u64 userdata, int cyclesLate)
 {
 	PowerPC::ppcState.spr[SPR_DEC] = 0xFFFFFFFF;
-	Common::AtomicOr(PowerPC::ppcState.Exceptions, EXCEPTION_DECREMENTER);
+	PowerPC::ppcState.Exceptions |= EXCEPTION_DECREMENTER;
 }
 
 void DecrementerSet()
@@ -194,7 +194,6 @@ static void PatchEngineCallback(u64 userdata, int cyclesLate)
 {
 	// Patch mem and run the Action Replay
 	PatchEngine::ApplyFramePatches();
-	PatchEngine::ApplyARPatches();
 	CoreTiming::ScheduleEvent(VideoInterface::GetTicksPerFrame() - cyclesLate, et_PatchEngine);
 }
 

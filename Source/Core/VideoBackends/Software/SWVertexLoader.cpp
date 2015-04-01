@@ -100,16 +100,17 @@ static T ReadNormalized(I value)
 }
 
 template <typename T, bool swap = false>
-static void ReadVertexAttribute(T* dst, DataReader src, const AttributeFormat& format, int base_component, int max_components, bool reverse)
+static void ReadVertexAttribute(T* dst, DataReader src, const AttributeFormat& format, int base_component, int components, bool reverse)
 {
 	if (format.enable)
 	{
 		src.Skip(format.offset);
 		src.Skip(base_component * (1<<(format.type>>1)));
 
-		for (int i = 0; i < std::min(format.components - base_component, max_components); i++)
+		int i;
+		for (i = 0; i < std::min(format.components - base_component, components); i++)
 		{
-			int i_dst = reverse ? max_components - i - 1 : i;
+			int i_dst = reverse ? components - i - 1 : i;
 			switch (format.type)
 			{
 				case VAR_UNSIGNED_BYTE:
@@ -130,6 +131,11 @@ static void ReadVertexAttribute(T* dst, DataReader src, const AttributeFormat& f
 			}
 
 			_assert_msg_(VIDEO, !format.integer || format.type != VAR_FLOAT, "only non-float values are allowed to be streamed as integer");
+		}
+		for (; i < components; i++)
+		{
+			int i_dst = reverse ? components - i - 1 : i;
+			dst[i_dst] = i == 3;
 		}
 	}
 }
@@ -174,9 +180,9 @@ void SWVertexLoader::LoadVertex()
 	// convert the vertex from the gc format to the videocommon (hardware optimized) format
 	u8* old = g_video_buffer_read_ptr;
 	int converted_vertices = m_CurrentLoader->RunVertices(
-		m_primitiveType, 1,
 		DataReader(g_video_buffer_read_ptr, nullptr), // src
-		DataReader(m_LoadedVertices.data(), m_LoadedVertices.data() + m_LoadedVertices.size()) // dst
+		DataReader(m_LoadedVertices.data(), m_LoadedVertices.data() + m_LoadedVertices.size()), // dst
+		1, m_primitiveType
 	);
 	g_video_buffer_read_ptr = old + m_CurrentLoader->m_VertexSize;
 

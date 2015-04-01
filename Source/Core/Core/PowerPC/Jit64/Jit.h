@@ -71,7 +71,7 @@ public:
 	// Jit!
 
 	void Jit(u32 em_address) override;
-	const u8* DoJit(u32 em_address, PPCAnalyst::CodeBuffer *code_buffer, JitBlock *b, u32 nextPC);
+	const u8* DoJit(u32 em_address, PPCAnalyst::CodeBuffer *code_buf, JitBlock *b, u32 nextPC);
 
 	BitSet32 CallerSavedRegistersInUse();
 
@@ -152,7 +152,6 @@ public:
 	void FloatCompare(UGeckoInstruction inst, bool upper = false);
 
 	// OPCODES
-	void unknown_instruction(UGeckoInstruction _inst);
 	void FallBackToInterpreter(UGeckoInstruction _inst);
 	void DoNothing(UGeckoInstruction _inst);
 	void HLEFunction(UGeckoInstruction _inst);

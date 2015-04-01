@@ -15,6 +15,7 @@
 #include "Core/NetPlayProto.h"
 #include "Core/HW/Memmap.h"
 
+#include "VideoCommon/AsyncRequests.h"
 #include "VideoCommon/CommandProcessor.h"
 #include "VideoCommon/CPMemory.h"
 #include "VideoCommon/DataReader.h"
@@ -103,7 +104,8 @@ void Fifo_Init()
 
 void Fifo_Shutdown()
 {
-	if (GpuRunningState) PanicAlert("Fifo shutting down while active");
+	if (GpuRunningState)
+		PanicAlert("Fifo shutting down while active");
 	FreeMemoryPages(s_video_buffer, FIFO_SIZE + 4);
 	s_video_buffer = nullptr;
 	s_video_buffer_write_ptr = nullptr;
@@ -112,16 +114,6 @@ void Fifo_Shutdown()
 	s_video_buffer_seen_ptr = nullptr;
 	s_fifo_aux_write_ptr = nullptr;
 	s_fifo_aux_read_ptr = nullptr;
-}
-
-u8* GetVideoBufferStartPtr()
-{
-	return s_video_buffer;
-}
-
-u8* GetVideoBufferEndPtr()
-{
-	return s_video_buffer_write_ptr;
 }
 
 void Fifo_SetRendering(bool enabled)
@@ -136,7 +128,8 @@ void ExitGpuLoop()
 	// This should break the wait loop in CPU thread
 	CommandProcessor::fifo.bFF_GPReadEnable = false;
 	SCPFifoStruct &fifo = CommandProcessor::fifo;
-	while (fifo.isGpuReadingData) Common::YieldCPU();
+	while (fifo.isGpuReadingData)
+		Common::YieldCPU();
 	// Terminate GPU thread loop
 	GpuRunningState = false;
 	EmuRunningState = true;
@@ -282,11 +275,14 @@ void RunGpuLoop()
 	// This allows a system that we are maxing out in dual core mode to do other things
 	bool yield_cpu = cpu_info.num_cores <= 2;
 
+	AsyncRequests::GetInstance()->SetEnable(true);
+	AsyncRequests::GetInstance()->SetPassthrough(false);
+
 	while (GpuRunningState)
 	{
 		g_video_backend->PeekMessages();
 
-		VideoFifo_CheckAsyncRequest();
+		AsyncRequests::GetInstance()->PullEvents();
 		if (g_use_deterministic_gpu_thread)
 		{
 			// All the fifo/CP stuff is on the CPU.  We just need to run the opcode decoder.
@@ -348,7 +344,7 @@ void RunGpuLoop()
 				// This call is pretty important in DualCore mode and must be called in the FIFO Loop.
 				// If we don't, s_swapRequested or s_efbAccessRequested won't be set to false
 				// leading the CPU thread to wait in Video_BeginField or Video_AccessEFB thus slowing things down.
-				VideoFifo_CheckAsyncRequest();
+				AsyncRequests::GetInstance()->PullEvents();
 				CommandProcessor::isPossibleWaitingSetDrawDone = false;
 			}
 
@@ -377,6 +373,8 @@ void RunGpuLoop()
 	}
 	// wake up SyncGPU if we were interrupted
 	s_video_buffer_cond.notify_all();
+	AsyncRequests::GetInstance()->SetEnable(false);
+	AsyncRequests::GetInstance()->SetPassthrough(true);
 }
 
 
