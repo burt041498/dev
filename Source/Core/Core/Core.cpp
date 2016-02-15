@@ -376,6 +376,116 @@ static void FifoPlayerThread()
 	return;
 }
 
+void VideoPrepare()
+{
+	SCoreStartupParameter& core_parameter =
+		SConfig::GetInstance().m_LocalCoreStartupParameter;
+
+	// Determine the CPU thread function
+	void (*cpuThreadFunc)(void);
+	if (core_parameter.m_BootType == SCoreStartupParameter::BOOT_DFF)
+		cpuThreadFunc = FifoPlayerThread;
+	else
+		cpuThreadFunc = CpuThread;
+
+	// ENTER THE VIDEO THREAD LOOP
+	if (core_parameter.bCPUThread)
+	{
+		// This thread, after creating the EmuWindow, spawns a CPU
+		// thread, and then takes over and becomes the video thread
+		Common::SetCurrentThreadName("Video thread");
+
+		g_video_backend->Video_Prepare();
+
+		// Spawn the CPU thread
+		s_cpu_thread = std::thread(cpuThreadFunc);
+
+		// become the GPU thread
+		g_video_backend->Video_EnterLoop();
+
+		// We have now exited the Video Loop
+		INFO_LOG(CONSOLE, "%s", StopMessage(false, "Video Loop Ended").c_str());
+	}
+	else // SingleCore mode
+	{
+		// The spawned CPU Thread also does the graphics.
+		// The EmuThread is thus an idle thread, which sleeps while
+		// waiting for the program to terminate. Without this extra
+		// thread, the video backend window hangs in single core mode
+		// because no one is pumping messages.
+		Common::SetCurrentThreadName("Emuthread - Idle");
+
+		// Spawn the CPU+GPU thread
+		s_cpu_thread = std::thread(cpuThreadFunc);
+
+		while (PowerPC::GetState() != PowerPC::CPU_POWERDOWN)
+		{
+			g_video_backend->PeekMessages();
+			Common::SleepCurrentThread(20);
+		}
+	}
+
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "Stopping Emu thread ...").c_str());
+
+	// Wait for s_cpu_thread to exit
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "Stopping CPU-GPU thread ...").c_str());
+
+	#ifdef USE_GDBSTUB
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "Stopping GDB ...").c_str());
+	gdb_deinit();
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "GDB stopped.").c_str());
+	#endif
+
+	s_cpu_thread.join();
+
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "CPU thread stopped.").c_str());
+
+	if (core_parameter.bCPUThread)
+		g_video_backend->Video_Cleanup();
+
+	VolumeHandler::EjectVolume();
+	FileMon::Close();
+
+	// Stop audio thread - Actually this does nothing when using HLE
+	// emulation, but stops the DSP Interpreter when using LLE emulation.
+	DSP::GetDSPEmulator()->DSP_StopSoundStream();
+
+	// We must set up this flag before executing HW::Shutdown()
+	s_hardware_initialized = false;
+	INFO_LOG(CONSOLE, "%s", StopMessage(false, "Shutting down HW").c_str());
+	HW::Shutdown();
+	INFO_LOG(CONSOLE, "%s", StopMessage(false, "HW shutdown").c_str());
+
+	if (init_controllers)
+	{
+		Wiimote::Shutdown();
+		Keyboard::Shutdown();
+		Pad::Shutdown();
+		init_controllers = false;
+	}
+
+	g_video_backend->Shutdown();
+	AudioCommon::ShutdownSoundStream();
+
+	INFO_LOG(CONSOLE, "%s", StopMessage(true, "Main Emu thread stopped").c_str());
+
+	// Clear on screen messages that haven't expired
+	g_video_backend->Video_ClearMessages();
+
+	// Reload sysconf file in order to see changes committed during emulation
+	if (core_parameter.bWii)
+		SConfig::GetInstance().m_SYSCONF->Reload();
+
+	INFO_LOG(CONSOLE, "Stop [Video Thread]\t\t---- Shutdown complete ----");
+	Movie::Shutdown();
+	PatchEngine::Shutdown();
+
+	s_is_stopping = false;
+
+	if (s_on_stopped_callback)
+		s_on_stopped_callback();
+}
+
 // Initialize and create emulation thread
 // Call browser: Init():s_emu_thread().
 // See the BootManager.cpp file description for a complete call schedule.
