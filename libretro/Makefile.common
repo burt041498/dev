@@ -169,6 +169,7 @@ SOURCES_CXX += $(COREDIR)/AudioCommon/AudioCommonLibretro.cpp \
 SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/CDUtils.cpp \
 					$(CORECOMMONDIR)/ColorUtil.cpp \
+					$(CORECOMMONDIR)/ENetUtil.cpp \
 					$(CORECOMMONDIR)/FileSearch.cpp \
 					$(CORECOMMONDIR)/FileUtil.cpp \
 					$(CORECOMMONDIR)/GekkoDisassembler.cpp \
@@ -192,10 +193,11 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/SysConf.cpp \
 					$(CORECOMMONDIR)/Thread.cpp \
 					$(CORECOMMONDIR)/Timer.cpp \
+					$(CORECOMMONDIR)/TraversalClient.cpp \
 					$(CORECOMMONDIR)/VersionLibretro.cpp \
 					$(CORECOMMONDIR)/Crypto/bn.cpp \
 					$(CORECOMMONDIR)/Crypto/ec.cpp \
-					$(CORECOMMONDIR)/Logging/ConsoleListener.cpp \
+					$(CORECOMMONDIR)/Logging/ConsoleListenerNix.cpp \
 					$(CORECOMMONDIR)/Logging/LogManager.cpp \
 					$(CORECOMMONDIR)/x64ABI.cpp \
 					$(CORECOMMONDIR)/x64Analyzer.cpp \
@@ -286,7 +288,8 @@ SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/GLExtensions/GLExtensions.cpp \
 					$(COREDIR)/VideoBackends/OGL/GLInterface/LibretroGL.cpp
 
 # Target video common
-SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \
+SOURCES_CXX += $(COREDIR)/VideoCommon/AsyncRequests.cpp \
+					$(COREDIR)/VideoCommon/BoundingBox.cpp \
 					$(COREDIR)/VideoCommon/BPFunctions.cpp \
 					$(COREDIR)/VideoCommon/BPMemory.cpp \
 					$(COREDIR)/VideoCommon/BPStructs.cpp \
@@ -453,7 +456,6 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/HW/GPFifo.cpp \
 					$(COREDIR)/Core/HW/HW.cpp \
 					$(COREDIR)/Core/HW/Memmap.cpp \
-					$(COREDIR)/Core/HW/MemmapFunctions.cpp \
 					$(COREDIR)/Core/HW/MemoryInterface.cpp \
 					$(COREDIR)/Core/HW/MMIO.cpp \
 					$(COREDIR)/Core/HW/ProcessorInterface.cpp \
@@ -500,7 +502,8 @@ SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
 
 SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/WiimoteReal.cpp 
 
-SOURCES_CXX += $(COREDIR)/Core/PowerPC/PowerPC.cpp \
+SOURCES_CXX += $(COREDIR)/Core/PowerPC/MMU.cpp \
+					$(COREDIR)/Core/PowerPC/PowerPC.cpp \
 					$(COREDIR)/Core/PowerPC/PPCAnalyst.cpp \
 					$(COREDIR)/Core/PowerPC/PPCCache.cpp \
 					$(COREDIR)/Core/PowerPC/PPCSymbolDB.cpp \
